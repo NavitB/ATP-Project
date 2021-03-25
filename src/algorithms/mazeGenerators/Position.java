@@ -11,6 +11,7 @@ public class Position {
     private int rowIndex;
     private int columnIndex;
 
+
     public int getRowIndex() {
         return rowIndex;
     }
