@@ -21,6 +21,7 @@ public class SimpleMazeGenerator extends AMazeGenerator{
         newMaze.setGoalPosition(goalP);
 
         int[][] m = new int[rows][columns];
+        return null;
 
 
 
