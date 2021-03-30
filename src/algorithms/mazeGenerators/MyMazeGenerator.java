@@ -1,92 +1,119 @@
-//package algorithms.mazeGenerators;
-//
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//public class MyMazeGenerator extends AMazeGenerator{
-//
-//    @Override
-//    public Maze generate(int rows, int columns) {
-//
-//        int[][] map = resetMazeWithWalls(rows, columns);
-//        ArrayList<Position> walls = new ArrayList<Position>();
-//        ArrayList<Position> maze = new ArrayList<Position>();
-//        ArrayList<Position> visited = new ArrayList<Position>();
-//        //Map<Position, Boolean> visited = new HashMap<Position, Boolean>();
-//        Position start = getStartPos(map,rows,columns);
-//        maze.add(start);
-//        visited.add(start);
-//        walls.addAll(getNeighbours(map,start.getRowIndex(),start.getColumnIndex(),rows,columns));
-//        while(!walls.isEmpty())
-//        {
-//            int randomIndex = (int)(Math.random() * walls.size());
-//            Position temp = walls.get(randomIndex);
-//            walls.remove(temp);
-//            visited.add(temp);
-//
-//
-//
-//        }
-//    return null;
-//    }
-//
-//    private Position getStartPos (int[][] map,int rows,int columns)
-//    {
-//        double rowS = Math.random() * rows;
-//        double colS = Math.random() * columns;
-//        while ((int)rowS != 0 || (int)rowS != rows-1 || (int)colS != 0 || (int)colS != columns-1 ) //if the start not on the frame
-//        {
-//            rowS = Math.random() * rows;
-//            colS = Math.random() * columns;
-//        }
-//        map[(int)rowS][(int)colS] = 0;
-//        Position start = new Position((int)rowS, (int)colS); //making new start position
-//        return null;
-//    }
-//
-//    private int[][] resetMazeWithWalls(int rows, int columns)
-//    {
-//        int[][] map = new int[rows][columns];
-//        for(int i = 0; i < rows; i++)
-//        {
-//            for(int j = 0; j < columns; j++)
-//            {
-//                map[i][j] = 1;
-//            }
-//        }
-//        return map;
-//    }
-//
-//    private ArrayList<Position> getNeighbours(int[][] map, int rowIndex, int colIndex , int rows, int columns)
-//    {
-//        ArrayList<Position> neighbours = new ArrayList<Position>();
-//        if(rowIndex + 1 <= rows && map[rowIndex+1][colIndex] == 1)
-//        {
-//            Position downN = new Position(rowIndex+1, colIndex);
-//            neighbours.add(downN);
-//        }
-//        if (colIndex + 1 <= columns && map[rowIndex][colIndex+1] == 1)
-//        {
-//            Position rightN = new Position(rowIndex, colIndex+1);
-//            neighbours.add(rightN);
-//        }
-//        if (rowIndex - 1 >= 0 && map[rowIndex-1][colIndex] == 1)
-//        {
-//            Position upN = new Position(rowIndex-1, colIndex);
-//            neighbours.add(upN);
-//        }
-//        if(colIndex - 1 >= 0 && map[rowIndex][colIndex-1] == 1)
-//        {
-//            Position leftN = new Position(rowIndex, colIndex-1);
-//            neighbours.add(leftN);
-//        }
-//    }
-//
-//    private boolean checkVisitedNeighbours (int[][]map, Position temp)
-//    {
-//        ArrayList<Position> neighbours = getNeighbours(map,temp.getRowIndex(), temp.getColumnIndex(),map.length,map[0].length);
-//        return null;
-//    }
-//
-//}
+package algorithms.mazeGenerators;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyMazeGenerator extends AMazeGenerator{
+
+    @Override
+    public Maze generate(int rows, int columns) {
+
+        int[][] map = resetMazeWithWalls(rows, columns);
+        ArrayList<Position> maze = new ArrayList<Position>();
+        ArrayList<Position> visited = new ArrayList<Position>();
+        Position start = getStartPos(map,rows,columns);
+        maze.add(start);
+        visited.add(start);
+        ArrayList<Position> walls = new ArrayList<Position>(ifWalls(map, getNeighbors(start.getRowIndex(), start.getColumnIndex(), rows, columns)));
+        while(!walls.isEmpty())
+        {
+            int randomIndex = (int)(Math.random() * walls.size());
+            Position pos = walls.get(randomIndex);
+            walls.remove(pos);
+            visited.add(pos);
+            if(checkVisitedNeighbors(map,pos,visited))
+            {
+                addToMaze(map,pos,maze);
+                walls.addAll(ifWalls(map,getNeighbors(pos.getRowIndex(),pos.getColumnIndex(),rows,columns))); //add neighbors walls
+            }
+
+        }
+
+    }
+
+    private Position getStartPos (int[][] map,int rows,int columns)
+    {
+        double rowS = Math.random() * rows;
+        double colS = Math.random() * columns;
+        while ((int)rowS != 0 || (int)rowS != rows-1 || (int)colS != 0 || (int)colS != columns-1 ) //if the start not on the frame
+        {
+            rowS = Math.random() * rows;
+            colS = Math.random() * columns;
+        }
+        map[(int)rowS][(int)colS] = 0;
+        return new Position((int)rowS, (int)colS);
+    }
+
+    private int[][] resetMazeWithWalls(int rows, int columns)
+    {
+        int[][] map = new int[rows][columns];
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < columns; j++)
+            {
+                map[i][j] = 1;
+            }
+        }
+        return map;
+    }
+
+    private ArrayList<Position> getNeighbors(int rowIndex, int colIndex , int rows, int columns)
+    {
+        ArrayList<Position> neighbors = new ArrayList<>();
+        if(rowIndex + 1 <= rows)
+        {
+            Position downN = new Position(rowIndex+1, colIndex);
+            neighbors.add(downN);
+        }
+        if (colIndex + 1 <= columns)
+        {
+            Position rightN = new Position(rowIndex, colIndex+1);
+            neighbors.add(rightN);
+        }
+        if (rowIndex - 1 >= 0)
+        {
+            Position upN = new Position(rowIndex-1, colIndex);
+            neighbors.add(upN);
+        }
+        if(colIndex - 1 >= 0 )
+        {
+            Position leftN = new Position(rowIndex, colIndex-1);
+            neighbors.add(leftN);
+        }
+        return neighbors;
+    }
+
+    private ArrayList<Position> ifWalls (int[][] map, ArrayList<Position> neighbors)
+    {
+        ArrayList<Position> neighborWalls = new ArrayList<>();
+        for(Position pos : neighbors)
+        {
+            int rowIndex = pos.getRowIndex();
+            int colIndex = pos.getColumnIndex();
+            if(map[rowIndex][colIndex] == 1)
+                neighborWalls.add(pos);
+        }
+        return neighborWalls;
+    }
+
+    private boolean checkVisitedNeighbors (int[][]map, Position pos, ArrayList<Position> visited)
+    {
+        ArrayList<Position> neighbors = getNeighbors(pos.getRowIndex(), pos.getColumnIndex(),map.length,map[0].length);
+        int totalVisited = 0;
+        for(Position p : neighbors)
+        {
+            if (visited.contains(p))
+                totalVisited++;
+        }
+        return totalVisited == 1;
+    }
+
+    private void addToMaze(int[][] map, Position pos,ArrayList<Position> maze)
+    {
+        int rowIndex = pos.getRowIndex();
+        int colIndex = pos.getColumnIndex();
+        map[rowIndex][colIndex] = 0;
+        maze.add(pos);
+    }
+}
