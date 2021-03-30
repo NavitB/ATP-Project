@@ -143,3 +143,6 @@ Test finished!
 Test started!
 TEST Passed: generating maze (50*50) using MyMazeGenerator
 Test finished!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+Test finished!
