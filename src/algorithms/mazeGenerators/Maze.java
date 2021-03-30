@@ -9,8 +9,9 @@ public class Maze {
     private Position goalPosition;
 
 
-    public Maze(int numOfRows, int numOfColumns) {
+    public Maze(int numOfRows, int numOfColumns, int[][] map) {
 
+        this.maze = map;
         this.numOfRows = numOfRows;
         this.numOfColumns = numOfColumns;
     }

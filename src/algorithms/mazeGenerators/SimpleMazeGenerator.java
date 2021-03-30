@@ -5,6 +5,7 @@ public class SimpleMazeGenerator extends AMazeGenerator{
     @Override
     public Maze generate(int rows, int columns)
     {
+        /**
         Maze newMaze = new Maze(rows,columns);
         double rowS = Math.random() * rows;
         double colS = Math.random() * columns;
@@ -22,6 +23,9 @@ public class SimpleMazeGenerator extends AMazeGenerator{
 
         int[][] m = new int[rows][columns];
         return null;
+**/
+
+
 
 
 
