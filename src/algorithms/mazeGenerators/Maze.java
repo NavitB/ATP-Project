@@ -12,8 +12,9 @@ public class Maze {
 
     public Maze(Position start, Position end, int[][] map) {
 
+        this.startPosition = start;
+        this.goalPosition = end;
         this.maze = map;
-
     }
 
     public void setMaze(int[][] maze) {
