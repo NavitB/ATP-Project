@@ -45,14 +45,20 @@ public class Maze {
     public void print()
     {
         int[][] map = getMaze();
-        //map[getStartPosition().getRowIndex()][getStartPosition().getColumnIndex()] =8;
         String myMaze = "";
-        for (int i = 0 ; i < map[0].length;i++)
+        for (int i = 0 ; i < map[0].length ; i++)
         {
             myMaze+= "{";
-            for (int j = 0 ; j < map.length ; j ++)
+            for (int j = 0 ; j < map.length ; j++)
             {
-                myMaze+=" "+map[0][i];
+                if (i == getStartPosition().getRowIndex() && j == getStartPosition().getColumnIndex())
+                    myMaze+=" S";
+                else if (i == getGoalPosition().getRowIndex() && j == getGoalPosition().getColumnIndex())
+                    myMaze+=" E";
+                else
+                {
+                    myMaze+=" "+map[i][j];
+                }
             }
             myMaze+=" }\n";
         }
