@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class SearchableMaze implements ISearchable{
     private Maze M;
     @Override
-    public ArrayList<State> getAllPossibleStates(State S) {
+    public ArrayList<AState> getAllPossibleStates(AState S) {
         return null;
     }
 }

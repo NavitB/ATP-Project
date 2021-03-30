@@ -1,4 +1,29 @@
 package algorithms.search;
 
-public class AState {
+public class AState
+{
+    private Object state;
+    private AState cameFrom;
+    private double cost;
+
+    public AState(Object state)
+    {
+        this.state = state;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public AState getCameFrom() {
+        return cameFrom;
+    }
+
+    public Object getState() {
+        return state;
+    }
+
+    public void setCameFrom(AState cameFrom) {
+        this.cameFrom = cameFrom;
+    }
 }

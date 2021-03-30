@@ -2,5 +2,5 @@ package algorithms.search;
 import java.util.ArrayList;
 
 public interface ISearchable {
-    ArrayList<State> getAllPossibleStates(State S);
+    ArrayList<AState> getAllPossibleStates(AState S);
 }
