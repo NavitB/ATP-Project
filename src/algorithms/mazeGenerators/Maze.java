@@ -1,5 +1,7 @@
 package algorithms.mazeGenerators;
 
+import java.util.Arrays;
+
 public class Maze {
 
 
@@ -36,5 +38,25 @@ public class Maze {
 
     public Position getGoalPosition() {
         return goalPosition;
+    }
+
+
+    public void print()
+    {
+        int[][] map = getMaze();
+        //map[getStartPosition().getRowIndex()][getStartPosition().getColumnIndex()] =8;
+        String myMaze = "";
+        for (int i = 0 ; i < map[0].length;i++)
+        {
+            myMaze+= "{";
+            for (int j = 0 ; j < map.length ; j ++)
+            {
+                myMaze+=" "+map[0][i];
+            }
+            myMaze+=" }\n";
+        }
+        System.out.println(myMaze);
+
+
     }
 }

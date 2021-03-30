@@ -15,6 +15,7 @@ public class MyMazeGenerator extends AMazeGenerator{
       //  Map<Position, Boolean> visited = new HashMap<Position, Boolean>();
 
 
+        return null;
     }
 
     private int[][] resetMazeWithWalls(int rows, int columns)
