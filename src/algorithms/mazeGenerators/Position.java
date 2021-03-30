@@ -26,6 +26,21 @@ public class Position {
 //        this.columnIndex = column;
 //    }
 
+
+    @Override
+    public int hashCode() {
+        int hash = (53 + this.rowIndex) * (53 + this.columnIndex);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Position pos = (Position) obj;
+        return pos.getRowIndex() == rowIndex && pos.getColumnIndex() == columnIndex;
+    }
+
+
+
     @Override
     public String toString() {
         return "{" +

@@ -29,7 +29,7 @@ public class Main {
 
     private static int[][] getRowsColumnsCombinations() {
         int[][] rowsColumnsCombinations = {
-                {5, 5}
+                {50, 50}
         };
         return rowsColumnsCombinations;
     }
@@ -43,7 +43,7 @@ public class Main {
         for (int i = 0; i < rowsColumnsCombinations.length; i++) {
             rows = rowsColumnsCombinations[i][0];
             columns = rowsColumnsCombinations[i][1];
-            Test_MazeGenerator(new SimpleMazeGenerator(), rows, columns);
+            Test_MazeGenerator(new MyMazeGenerator(), rows, columns);
         }
     }
 
@@ -51,7 +51,7 @@ public class Main {
         boolean testStatus = true;
         try {
             // prints the time it takes the algorithm to run
-            mazeGenerator.measureAlgorithmTimeMillis(rows, columns);
+            System.out.println(mazeGenerator.measureAlgorithmTimeMillis(rows, columns));
             // generate another maze
             Maze maze = mazeGenerator.generate(rows, columns);
             // prints the maze
