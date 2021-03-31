@@ -3,6 +3,7 @@ package algorithms.search;
 import algorithms.mazeGenerators.Position;
 
 public class MazeState extends AState{
+
     public MazeState(Position state) {
         super(state);
     }
@@ -15,8 +16,9 @@ public class MazeState extends AState{
 
     @Override
     public boolean equals(Object obj) {
-        Position pos = (Position) obj;
+        Position pos = (Position)((MazeState)obj).getState();
         Position thisPos = (Position) this.getState();
-        return pos.getRowIndex() == thisPos.getRowIndex() && pos.getColumnIndex() == thisPos.getColumnIndex();
+        return pos.equals(thisPos);
+       // return pos.getRowIndex() == thisPos.getRowIndex() && pos.getColumnIndex() == thisPos.getColumnIndex();
     }
 }

@@ -20,7 +20,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm
         ArrayList<AState> validStates = problem.getAllSuccessors(start);
         for (AState state : validStates)
         {
-            if (state == goal)
+            if (state.equals(goal))
             {
               goal.setCameFrom(start);
               return;
@@ -31,6 +31,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm
                 recDFS(problem, state,goal, visited);
             }
         }
+        return;
     }
     private void restorePath(AState start,AState goal, ArrayList<AState> path)
     {

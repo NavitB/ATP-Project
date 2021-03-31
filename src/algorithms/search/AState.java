@@ -1,6 +1,6 @@
 package algorithms.search;
 
-public class AState
+public abstract class AState
 {
     private Object state;
     private AState cameFrom;

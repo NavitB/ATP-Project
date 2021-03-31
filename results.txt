@@ -146,3 +146,63 @@ Test finished!
 Test started!
 TEST Passed: generating maze (25*25) using MyMazeGenerator
 Test finished!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+Test finished!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+Test finished!
+Test started!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+Test finished!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (25,25)
+Test finished!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (25,25)
+Test finished!
+Test started!
+TEST Passed: generating maze (25*25) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (25,25)
+Test finished!
+Test started!
+TEST Passed: generating maze (5*5) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (5,5)
+Test finished!
+Test started!
+TEST Passed: generating maze (5*5) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (5,5)
+Test finished!
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (3,3)
+Test finished!
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (3,3)
+Test finished!
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (3,3)
+Test finished!
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (3,3)
+Test finished!
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+TEST Failed: Applying DepthFirstSearch on maze (3,3)
+Test finished!
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+Test started!
+TEST Passed: generating maze (3*3) using MyMazeGenerator
+TEST Passed: Applying DepthFirstSearch on maze (3,3)
+Test finished!

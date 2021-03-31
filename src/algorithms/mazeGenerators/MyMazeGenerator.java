@@ -123,7 +123,7 @@ public class MyMazeGenerator extends AMazeGenerator{
         int colIndex = pos.getColumnIndex();
         if(rowIndex == 0 || rowIndex == rows - 1 || colIndex == 0 || colIndex == columns-1 )
         {
-            return rowIndex != start.getRowIndex() && colIndex != start.getColumnIndex();
+            return pos != start;
         }
         return false;
     }

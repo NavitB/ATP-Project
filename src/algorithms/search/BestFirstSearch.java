@@ -1,4 +1,4 @@
 package algorithms.search;
-
-public class BestFirstSearch extends BreadthFirstSearch{
-}
+//
+//public class BestFirstSearch extends BreadthFirstSearch{
+//}
