@@ -29,7 +29,7 @@ public class Main {
 
     private static int[][] getRowsColumnsCombinations() {
         int[][] rowsColumnsCombinations = {
-                {1000, 1000}
+                {4, 4}
         };
         return rowsColumnsCombinations;
     }
@@ -86,7 +86,7 @@ public class Main {
                 columns = rowsColumnsCombinations[i][1];
 
                 Maze maze = mg.generate(rows, columns);
-                //maze.print();
+                maze.print();
                 SearchableMaze searchableMaze = new SearchableMaze(maze);
 
                 testPassed = solveProblem(searchableMaze, new DepthFirstSearch(), rows, columns);

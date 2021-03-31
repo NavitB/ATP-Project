@@ -285,3 +285,19 @@ Test started!
 TEST Passed: generating maze (1000*1000) using MyMazeGenerator
 TEST Passed: Applying DepthFirstSearch on maze (1000,1000)
 Test finished!
+Test started!
+TEST Passed: generating maze (4*4) using MyMazeGenerator
+TEST Passed: Applying DepthFirstSearch on maze (4,4)
+Test finished!
+Test started!
+TEST Passed: generating maze (4*4) using MyMazeGenerator
+TEST Passed: Applying DepthFirstSearch on maze (4,4)
+Test finished!
+Test started!
+TEST Passed: generating maze (4*4) using MyMazeGenerator
+TEST Passed: Applying DepthFirstSearch on maze (4,4)
+Test finished!
+Test started!
+TEST Passed: generating maze (4*4) using MyMazeGenerator
+TEST Passed: Applying DepthFirstSearch on maze (4,4)
+Test finished!

@@ -46,7 +46,7 @@ public class SearchableMaze implements ISearchable{
             MazeState leftS = new MazeState(left);
             validStates.add(leftS);
         }
-        if (row+1 < numOfRows && map[row+1][col] == 0 )
+        if (row+1 < numOfRows && map[row+1][col] == 0)
         {
             Position down = new Position(row+1 , col);
             MazeState downS = new MazeState(down);
@@ -57,6 +57,30 @@ public class SearchableMaze implements ISearchable{
             Position up = new Position(row-1 , col);
             MazeState upS = new MazeState(up);
             validStates.add(upS);
+        }
+        if (row-1 >=0 && col+1<numOfCol && map[row-1][col+1]==0 && ((map[row-1][col]==0)||(map[row][col+1]==0)))
+        {
+            Position diagRightUP = new Position(row-1 , col+1);
+            MazeState diagRightUPS = new MazeState(diagRightUP);
+            validStates.add(diagRightUPS);
+        }
+        if (row+1 < numOfRows && col+1<numOfCol && map[row+1][col+1]==0 && ((map[row][col+1]==0)||(map[row+1][col]==0)))
+        {
+            Position diagRightDown = new Position(row+1 , col+1);
+            MazeState diagRightDownS = new MazeState(diagRightDown);
+            validStates.add(diagRightDownS);
+        }
+        if (row-1>=0 && col-1>=0 && map[row-1][col-1]==0 && ((map[row-1][col]==0)||(map[row][col-1]==0)))
+        {
+            Position diagLeftUp = new Position(row-1 , col-1);
+            MazeState diagLeftUpS = new MazeState(diagLeftUp);
+            validStates.add(diagLeftUpS);
+        }
+        if (row+1< numOfRows && col-1>=0 && map[row+1][col-1]==0 && ((map[row+1][col]==0)||(map[row][col-1]==0)))
+        {
+            Position diagLeftDown = new Position(row+1 , col-1);
+            MazeState diagLeftDownS = new MazeState(diagLeftDown);
+            validStates.add(diagLeftDownS);
         }
         return validStates;
     }
