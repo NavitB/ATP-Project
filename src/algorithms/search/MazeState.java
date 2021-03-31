@@ -7,4 +7,5 @@ public class MazeState extends AState{
         super(state);
     }
 
+
 }

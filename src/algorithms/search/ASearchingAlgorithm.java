@@ -12,7 +12,5 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     public int getNumberOfVisitedNodes() {
         return 0;
     }
-    protected ArrayList<AState> findNeighbors (AState state){
-        return null;
-    }
+
 }
