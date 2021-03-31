@@ -26,4 +26,14 @@ public class AState
     public void setCameFrom(AState cameFrom) {
         this.cameFrom = cameFrom;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
