@@ -44,16 +44,16 @@ public class Maze {
 
     public void print()
     {
-        int[][] map = getMaze();
+        int[][] map = this.getMaze();
         String myMaze = "";
-        for (int i = 0 ; i < map[0].length ; i++)
+        for (int i = 0 ; i < map.length ; i++)
         {
             myMaze+= "{";
-            for (int j = 0 ; j < map.length ; j++)
+            for (int j = 0 ; j < map[0].length ; j++)
             {
-                if (i == getStartPosition().getRowIndex() && j == getStartPosition().getColumnIndex())
+                if (i == this.getStartPosition().getRowIndex() && j == this.getStartPosition().getColumnIndex())
                     myMaze+=" S";
-                else if (i == getGoalPosition().getRowIndex() && j == getGoalPosition().getColumnIndex())
+                else if (i == this.getGoalPosition().getRowIndex() && j == this.getGoalPosition().getColumnIndex())
                     myMaze+=" E";
                 else
                 {

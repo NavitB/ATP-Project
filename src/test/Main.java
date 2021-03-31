@@ -29,7 +29,7 @@ public class Main {
 
     private static int[][] getRowsColumnsCombinations() {
         int[][] rowsColumnsCombinations = {
-                {3, 3}
+                {1000, 1000}
         };
         return rowsColumnsCombinations;
     }
@@ -50,11 +50,11 @@ public class Main {
         boolean testStatus = true;
         try {
             // prints the time it takes the algorithm to run
-            System.out.println(mazeGenerator.measureAlgorithmTimeMillis(rows, columns));
+            //System.out.println(mazeGenerator.measureAlgorithmTimeMillis(rows, columns));
             // generate another maze
             Maze maze = mazeGenerator.generate(rows, columns);
             // prints the maze
-            maze.print();
+            //maze.print();
 
             // get the maze entrance
             Position startPosition = maze.getStartPosition();
@@ -86,6 +86,7 @@ public class Main {
                 columns = rowsColumnsCombinations[i][1];
 
                 Maze maze = mg.generate(rows, columns);
+                //maze.print();
                 SearchableMaze searchableMaze = new SearchableMaze(maze);
 
                 testPassed = solveProblem(searchableMaze, new DepthFirstSearch(), rows, columns);

@@ -11,8 +11,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm
         recDFS(s ,s.getStartState(),s.getGoalState(),visited);
         ArrayList<AState> path = new ArrayList<>();
         restorePath(s.getStartState(),s.getGoalState(),path);
-        Solution sol = new Solution(path);
-        return sol;
+        this.setNumOfVisited(visited.size());
+        return new Solution(path);
     }
     private void recDFS(ISearchable problem, AState start, AState goal, HashMap<AState , Integer> visited)
     {
@@ -40,7 +40,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm
             path.add(0,start);
             return;
         }
-        path.add(0,goal.getCameFrom());
+        path.add(0,goal);
         restorePath(start,goal.getCameFrom(),path);
     }
     @Override

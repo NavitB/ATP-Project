@@ -21,4 +21,9 @@ public class MazeState extends AState{
         return pos.equals(thisPos);
        // return pos.getRowIndex() == thisPos.getRowIndex() && pos.getColumnIndex() == thisPos.getColumnIndex();
     }
+
+    @Override
+    public String toString() {
+        return this.getState().toString();
+    }
 }
