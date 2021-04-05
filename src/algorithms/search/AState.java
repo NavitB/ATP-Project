@@ -27,6 +27,10 @@ public abstract class AState
         this.cameFrom = cameFrom;
     }
 
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();
