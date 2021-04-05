@@ -32,9 +32,17 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
             {
                 if (state.equals(goal))
                 {
-                    goal.setCameFrom(start);
+                    if(goal.getCost()!= 0 && state.getCost()<goal.getCost() )
+                    {
+                        goal.setCameFrom(start);
+                        goal.setCost(state.getCost());
+                    }
+                    else if(goal.getCost()==0)
+                    {
+                        goal.setCameFrom(start);
+                        goal.setCost(state.getCost());
+                    }
                     this.setNumOfVisited(visited.size());
-                    return;
                 }
                 if (!visited.containsKey(state))
                 {

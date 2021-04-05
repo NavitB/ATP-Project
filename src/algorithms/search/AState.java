@@ -9,6 +9,7 @@ public abstract class AState
     public AState(Object state)
     {
         this.state = state;
+        this.cost = 0;
     }
 
     public double getCost() {
