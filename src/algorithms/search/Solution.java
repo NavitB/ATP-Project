@@ -8,6 +8,8 @@ public class Solution {
     public Solution(ArrayList<AState> solutionPath) {
         this.solutionPath = solutionPath;
     }
+
+
     public ArrayList<AState> getSolutionPath() {
         return solutionPath;
     }

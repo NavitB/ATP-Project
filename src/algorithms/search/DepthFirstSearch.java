@@ -31,18 +31,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm
                 recDFS(problem, state,goal, visited);
             }
         }
-        return;
     }
-    private void restorePath(AState start,AState goal, ArrayList<AState> path)
-    {
-        if (goal == start)
-        {
-            path.add(0,start);
-            return;
-        }
-        path.add(0,goal);
-        restorePath(start,goal.getCameFrom(),path);
-    }
+
     @Override
     public int getNumberOfVisitedNodes() {
         return super.getNumberOfVisitedNodes();
