@@ -10,12 +10,12 @@ public class MyMazeGenerator extends AMazeGenerator{
     public Maze generate(int rows, int columns) {
 
         int[][] map = resetMazeWithWalls(rows, columns);
-        ArrayList<Position> maze = new ArrayList<>();
+       // ArrayList<Position> maze = new ArrayList<>();
         //ArrayList<Position> visited = new ArrayList<>();
         HashMap<Position,Integer> visited = new HashMap<>();
         Position start = getStartPos(map,rows,columns);
         Position end = start;
-        maze.add(start);
+       // maze.add(start);
         visited.put(start,1);
         //visited.add(start);
         ArrayList<Position> walls = new ArrayList<>(ifWalls(map, getNeighbors(start.getRowIndex(), start.getColumnIndex(), rows, columns)));
@@ -28,7 +28,7 @@ public class MyMazeGenerator extends AMazeGenerator{
             //visited.add(pos);
             if(checkVisitedNeighbors(map,pos,visited))
             {
-                addToMaze(map,pos,maze);
+                addToMaze(map,pos);
                 walls.addAll(ifWalls(map,getNeighbors(pos.getRowIndex(),pos.getColumnIndex(),rows,columns))); //add neighbors walls
                 if(findGoalPos(pos,start,rows,columns))
                 {
@@ -128,11 +128,11 @@ public class MyMazeGenerator extends AMazeGenerator{
         return false;
     }
 
-    private void addToMaze(int[][] map, Position pos,ArrayList<Position> maze)
+    private void addToMaze(int[][] map, Position pos)
     {
         int rowIndex = pos.getRowIndex();
         int colIndex = pos.getColumnIndex();
         map[rowIndex][colIndex] = 0;
-        maze.add(pos);
+        //maze.add(pos);
     }
 }
