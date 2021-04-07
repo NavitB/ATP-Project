@@ -32,16 +32,14 @@ public class Maze3D {
         String myMaze3D = "{";
         for (int i = 0 ; i < map.length ; i++)
         {
-            //myMaze3D+= "{";
-
             if (i!=map.length&& i!=0)
             {
-                myMaze3D+= "-".repeat(map[0][0].length*2+1);
+                myMaze3D+= "-".repeat(map[0][0].length*2+3);
             }
             for (int j = 0 ; j < map[0].length ; j++)
             {
                 myMaze3D+=" \n";
-
+                myMaze3D+= "{";
                 for (int k = 0 ; k < map[0][0].length; k++)
                 {
                     if (k ==this.getStartPosition().getDepthIndex() && i == this.getStartPosition().getRowIndex() && j == this.getStartPosition().getColumnIndex())
@@ -52,15 +50,12 @@ public class Maze3D {
                     {
                         myMaze3D+=" "+map[k][i][j];
                     }
-
                 }
-
+                myMaze3D+= " }";
             }
-            //myMaze3D+="}";
             myMaze3D+=" \n";
         }
+        myMaze3D+="}";
         System.out.println(myMaze3D);
     }
-
-
 }
