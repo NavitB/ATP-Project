@@ -10,6 +10,12 @@ public class Maze {
     private Position goalPosition;
 
 
+    /**
+     * constructor of a maze
+     * @param start position where the maze begins
+     * @param end position where the maze ends
+     * @param map two-dimension array that represents a maze
+     */
     public Maze(Position start, Position end, int[][] map) {
 
         this.startPosition = start;

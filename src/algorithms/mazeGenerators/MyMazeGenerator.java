@@ -10,26 +10,21 @@ public class MyMazeGenerator extends AMazeGenerator{
     public Maze generate(int rows, int columns) {
 
         int[][] map = resetMazeWithWalls(rows, columns);
-       // ArrayList<Position> maze = new ArrayList<>();
-        //ArrayList<Position> visited = new ArrayList<>();
         HashMap<Position,Integer> visited = new HashMap<>();
         Position start = getStartPos(map,rows,columns);
         Position end = start;
-       // maze.add(start);
         visited.put(start,1);
-        //visited.add(start);
-        ArrayList<Position> walls = new ArrayList<>(ifWalls(map, getNeighbors(start.getRowIndex(), start.getColumnIndex(), rows, columns)));
+        ArrayList<Position> walls = new ArrayList<>(neighborsWalls(map, getNeighbors(start.getRowIndex(), start.getColumnIndex(), rows, columns)));
         while(!walls.isEmpty())
         {
             int randomIndex = (int)(Math.random() * walls.size());
             Position pos = walls.get(randomIndex);
             walls.remove(pos);
             visited.put(pos,1);
-            //visited.add(pos);
             if(checkVisitedNeighbors(map,pos,visited))
             {
                 addToMaze(map,pos);
-                walls.addAll(ifWalls(map,getNeighbors(pos.getRowIndex(),pos.getColumnIndex(),rows,columns))); //add neighbors walls
+                walls.addAll(neighborsWalls(map,getNeighbors(pos.getRowIndex(),pos.getColumnIndex(),rows,columns))); //add neighbors walls
                 if(findGoalPos(pos,start,rows,columns))
                 {
                     end = pos;
@@ -92,7 +87,7 @@ public class MyMazeGenerator extends AMazeGenerator{
         return neighbors;
     }
 
-    private ArrayList<Position> ifWalls (int[][] map, ArrayList<Position> neighbors)
+    private ArrayList<Position> neighborsWalls (int[][] map, ArrayList<Position> neighbors)
     {
         ArrayList<Position> neighborWalls = new ArrayList<>();
         for(Position pos : neighbors)
@@ -133,6 +128,5 @@ public class MyMazeGenerator extends AMazeGenerator{
         int rowIndex = pos.getRowIndex();
         int colIndex = pos.getColumnIndex();
         map[rowIndex][colIndex] = 0;
-        //maze.add(pos);
     }
 }

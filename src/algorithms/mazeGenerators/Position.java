@@ -14,17 +14,9 @@ public class Position {
         return rowIndex;
     }
 
-//    public void setRow(int row) {
-//        this.rowIndex = row;
-//    }
-
     public int getColumnIndex() {
         return columnIndex;
     }
-
-//    public void setColumn(int column) {
-//        this.columnIndex = column;
-//    }
 
 
     @Override
@@ -38,8 +30,6 @@ public class Position {
         Position pos = (Position) obj;
         return pos.getRowIndex() == rowIndex && pos.getColumnIndex() == columnIndex;
     }
-
-
 
     @Override
     public String toString() {

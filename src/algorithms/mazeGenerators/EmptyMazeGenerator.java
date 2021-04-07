@@ -2,6 +2,11 @@ package algorithms.mazeGenerators;
 
 public class EmptyMazeGenerator extends AMazeGenerator {
 
+    /**
+     * @param rows num of rows
+     * @param columns num of columns
+     * @return an empty maze (only with zeros) in the size of rows*columns
+     */
     @Override
     public Maze generate(int rows, int columns) {
         int[][] map = new int[rows][columns];
