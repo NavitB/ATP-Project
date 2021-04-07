@@ -13,7 +13,7 @@ public class RunSearchOnMaze {
         IMazeGenerator mg = new MyMazeGenerator();
         //Maze maze = mg.generate(1000, 1000);
         //maze.print();
-        int[][] map = {{0,0,0,0,1},{1,0,1,1,0},{1,1,0,1,0},{1,1,1,0,0}};
+        int[][] map = {{0,0,0,0,0},{0,0,1,1,0},{1,0,0,1,0},{1,1,0,0,0}};
         Position start = new Position(0,0);
         Position end = new Position(2,4);
         Maze maze = new Maze(start,end,map);

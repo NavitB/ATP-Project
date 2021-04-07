@@ -26,5 +26,41 @@ public class Maze3D {
         return goalPosition;
     }
 
+    public void print()
+    {
+        int[][][] map = this.getMap();
+        String myMaze3D = "{";
+        for (int i = 0 ; i < map.length ; i++)
+        {
+            //myMaze3D+= "{";
+
+            if (i!=map.length&& i!=0)
+            {
+                myMaze3D+= "-".repeat(map[0][0].length*2+1);
+            }
+            for (int j = 0 ; j < map[0].length ; j++)
+            {
+                myMaze3D+=" \n";
+
+                for (int k = 0 ; k < map[0][0].length; k++)
+                {
+                    if (k ==this.getStartPosition().getDepthIndex() && i == this.getStartPosition().getRowIndex() && j == this.getStartPosition().getColumnIndex())
+                        myMaze3D+=" S";
+                    else if (k ==this.getGoalPosition().getDepthIndex() && i == this.getGoalPosition().getRowIndex() && j == this.getGoalPosition().getColumnIndex())
+                        myMaze3D+=" E";
+                    else
+                    {
+                        myMaze3D+=" "+map[k][i][j];
+                    }
+
+                }
+
+            }
+            //myMaze3D+="}";
+            myMaze3D+=" \n";
+        }
+        System.out.println(myMaze3D);
+    }
+
 
 }
