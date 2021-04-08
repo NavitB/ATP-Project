@@ -1,9 +1,6 @@
 package algorithms.search;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm{
     protected Queue<AState> queue;
@@ -21,39 +18,38 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
     }
     private void BFS(ISearchable problem, AState start, AState goal )
     {
-        HashMap<AState, Integer> visited = new HashMap<>();
-        visited.put(start,1);
+        HashSet<AState> visited = new HashSet<>();
+        HashMap<AState, Double> min = new HashMap<AState, Double>();
+        visited.add(start);
         queue.add(start);
         while (!queue.isEmpty())
         {
             start = queue.poll();
+            if (start.equals(goal))
+            {
+                goal.setCameFrom(start.getCameFrom());
+                goal.setCost(start.getCost());
+                this.setNumOfVisited(visited.size());
+                return;
+            }
+            visited.add(start);
             ArrayList<AState> validStates = problem.getAllSuccessors(start);
             for (AState state: validStates)
             {
-                if (state.equals(goal))
-                {
-                    if(goal.getCost()!= 0 && state.getCost()<goal.getCost() )
-                    {
-                        goal.setCameFrom(start);
-                        goal.setCost(state.getCost());
-                    }
-                    else if(goal.getCost()==0)
-                    {
-                        goal.setCameFrom(start);
-                        goal.setCost(state.getCost());
-                    }
-                    this.setNumOfVisited(visited.size());
-                }
-                if (!visited.containsKey(state))
-                {
-                    state.setCameFrom(start);
-                    queue.add(state);
-                    visited.put(state,1);
-                }
+                insertToQueue(state,start,visited,min);
             }
         }
     }
 
+    protected void insertToQueue(AState state,AState start, HashSet<AState> visited, HashMap<AState,Double> min)
+    {
+        if(!visited.contains(state))
+        {
+            state.setCameFrom(start);
+            queue.add(state);
+            visited.add(state);
+        }
+    }
     @Override
     public int getNumberOfVisitedNodes() {
         return super.getNumberOfVisitedNodes();
