@@ -1,5 +1,7 @@
 package algorithms.maze3D;
 
+import algorithms.mazeGenerators.Position;
+
 public class Position3D {
 
     private int depthIndex;
@@ -26,11 +28,20 @@ public class Position3D {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int hash = (53 + this.rowIndex) * (53 + this.columnIndex)*(53 + this.depthIndex);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        Position3D pos = (Position3D) obj;
+        return pos.getRowIndex() == rowIndex && pos.getColumnIndex() == columnIndex && pos.getDepthIndex()==depthIndex;
+    }
+    @Override
+    public String toString() {
+        return "{" +depthIndex+","+
+                rowIndex +
+                "," + columnIndex +
+                '}';
     }
 }

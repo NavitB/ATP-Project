@@ -40,7 +40,7 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         double depthS = Math.random() * depth;
         double rowS = Math.random() * rows;
         double colS = Math.random() * columns;
-        while ((int)depthS != 0 && (int)depthS != depth-1 && (int)rowS != 0 && (int)rowS != rows - 1 && (int)colS != 0 && (int)colS != columns-1 ) //if the start not on the frame
+        while ((int)rowS != 0 && (int)rowS != rows - 1 && (int)colS != 0 && (int)colS != columns-1 ) //if the start not on the frame
         {
             depthS = Math.random() * depth;
             rowS = Math.random() * rows;

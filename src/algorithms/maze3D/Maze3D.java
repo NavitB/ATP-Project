@@ -42,13 +42,13 @@ public class Maze3D {
                 myMaze3D+= "{";
                 for (int k = 0 ; k < map[0][0].length; k++)
                 {
-                    if (k ==this.getStartPosition().getDepthIndex() && i == this.getStartPosition().getRowIndex() && j == this.getStartPosition().getColumnIndex())
+                    if (i ==this.getStartPosition().getDepthIndex() && j == this.getStartPosition().getRowIndex() && k == this.getStartPosition().getColumnIndex())
                         myMaze3D+=" S";
-                    else if (k ==this.getGoalPosition().getDepthIndex() && i == this.getGoalPosition().getRowIndex() && j == this.getGoalPosition().getColumnIndex())
+                    else if (i ==this.getGoalPosition().getDepthIndex() && j == this.getGoalPosition().getRowIndex() && k == this.getGoalPosition().getColumnIndex())
                         myMaze3D+=" E";
                     else
                     {
-                        myMaze3D+=" "+map[k][i][j];
+                        myMaze3D+=" "+map[i][j][k];
                     }
                 }
                 myMaze3D+= " }";
