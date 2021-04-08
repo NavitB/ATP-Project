@@ -32,9 +32,9 @@ public class SearchableMaze3D  implements ISearchable {
     @Override
     public ArrayList<AState> getAllSuccessors(AState S) {
         int[][][] map = M.getMap();
-        int col = ((Position3D)S.getState()).getColumnIndex();
-        int row = ((Position3D)S.getState()).getRowIndex();
-        int depth = ((Position3D)S.getState()).getDepthIndex();
+        int col = ((Maze3DState)S).getState().getColumnIndex();
+        int row = ((Maze3DState)S).getState().getRowIndex();
+        int depth = ((Maze3DState)S).getState().getDepthIndex();
         ArrayList<AState> validStates = new ArrayList<>();
         int numOfDepth = map.length;
         int numOfRows = map[0].length;

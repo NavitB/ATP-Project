@@ -8,7 +8,12 @@ import java.util.ArrayList;
 
 public class RunMaze3DGenerator {
 
-        IMaze3DGenerator mg = new MyMaze3DGenerator();
-        Maze3D maze = mg.generate(3,3,3);
+        public static void main(String[] args) throws Exception {
+
+                IMaze3DGenerator mg = new MyMaze3DGenerator();
+                Maze3D maze = mg.generate(20,20,20);
+                maze.print();
+        }
+
 
 }

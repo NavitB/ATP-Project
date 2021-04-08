@@ -10,17 +10,16 @@ import java.util.ArrayList;
 
 public class RunSearchOnMaze3D {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         IMaze3DGenerator mg = new MyMaze3DGenerator();
-        Maze3D maze = mg.generate(3,3,3);
+        Maze3D maze = mg.generate(20,20,20);
         SearchableMaze3D searchableMaze3D = new SearchableMaze3D(maze);
-        //solveProblem(searchableMaze3D, new BreadthFirstSearch());
+        solveProblem(searchableMaze3D, new BreadthFirstSearch());
         solveProblem(searchableMaze3D, new DepthFirstSearch());
-        //solveProblem(searchableMaze3D , new BestFirstSearch());
+        solveProblem(searchableMaze3D , new BestFirstSearch());
     }
 
-    private static void solveProblem(ISearchable domain, ISearchingAlgorithm searcher)
-    {
+    private static void solveProblem(ISearchable domain, ISearchingAlgorithm searcher) throws Exception {
         Solution solution = searcher.solve(domain);
         System.out.println(String.format("'%s' algorithm - nodes evaluated: %s", searcher.getClass().getSimpleName(), searcher.getNumberOfVisitedNodes()));
         System.out.println("Solution path:");

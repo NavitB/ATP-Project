@@ -4,20 +4,26 @@ import algorithms.mazeGenerators.Position;
 
 public class MazeState extends AState{
 
+    private Position state;
+
     public MazeState(Position state) {
-        super(state);
+        this.state = state;
+    }
+
+    public Position getState() {
+        return state;
     }
 
     @Override
     public int hashCode() {
-        int hash = (53 + ((Position)this.getState()).getRowIndex()) * (53 + ((Position)this.getState()).getColumnIndex());
+        int hash = (53 + (this.state).getRowIndex()) * (53 + (this.state).getColumnIndex());
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        Position pos = (Position)((MazeState)obj).getState();
-        Position thisPos = (Position) this.getState();
+        Position pos = ((MazeState)obj).getState();
+        Position thisPos = this.state;
         return pos.equals(thisPos);
     }
 

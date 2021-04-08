@@ -29,8 +29,8 @@ public class SearchableMaze implements ISearchable{
     @Override
     public ArrayList<AState> getAllSuccessors(AState S) {
         int[][] map = M.getMaze();
-        int col = ((Position)S.getState()).getColumnIndex();
-        int row = ((Position)S.getState()).getRowIndex();
+        int col = ((MazeState)S).getState().getColumnIndex();
+        int row = ((MazeState)S).getState().getRowIndex();
         ArrayList<AState> validStates = new ArrayList<>();
         int numOfRows = map.length;
         int numOfCol = map[0].length;

@@ -8,7 +8,11 @@ import java.util.Stack;
 public class DepthFirstSearch extends ASearchingAlgorithm
 {
     @Override
-    public Solution solve(ISearchable s) {
+    public Solution solve(ISearchable s) throws Exception {
+        if(s == null)
+        {
+            throw new Exception("searchable is null");
+        }
         iterativeDFS(s,s.getStartState(),s.getGoalState());
         ArrayList<AState> path = new ArrayList<>();
         restorePath(s.getStartState(),s.getGoalState(),path);

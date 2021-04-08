@@ -9,7 +9,11 @@ import java.util.HashMap;
 public class MyMaze3DGenerator extends AMaze3DGenerator{
 
     @Override
-    public Maze3D generate(int depth, int row, int column) {
+    public Maze3D generate(int depth, int row, int column) throws Exception {
+        if(depth <= 1|| row <= 1 || column <= 1)
+        {
+            throw new Exception("wrong num of depth/rows/columns");
+        }
         int[][][] map = resetMazeWithWalls(depth ,row, column);
         HashMap<Position3D,Integer> visited = new HashMap<>();
         Position3D start = getStartPos(map,depth,row,column);

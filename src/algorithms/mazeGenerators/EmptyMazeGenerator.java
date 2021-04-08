@@ -8,7 +8,11 @@ public class EmptyMazeGenerator extends AMazeGenerator {
      * @return an empty maze (only with zeros) in the size of rows*columns
      */
     @Override
-    public Maze generate(int rows, int columns) {
+    public Maze generate(int rows, int columns) throws Exception {
+        if(rows <= 1 || columns <= 1)
+        {
+            throw new Exception("wrong num of rows/columns");
+        }
         int[][] map = new int[rows][columns];
         for(int i = 0; i < rows; i++)
         {

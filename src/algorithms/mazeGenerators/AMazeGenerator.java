@@ -8,8 +8,7 @@ public abstract class AMazeGenerator implements IMazeGenerator {
      * @return the time to generate a maze 
      */
     @Override
-    public long measureAlgorithmTimeMillis(int rows, int columns)
-    {
+    public long measureAlgorithmTimeMillis(int rows, int columns) throws Exception {
         long startT = System.currentTimeMillis();
         generate(rows,columns);
         long endT = System.currentTimeMillis();

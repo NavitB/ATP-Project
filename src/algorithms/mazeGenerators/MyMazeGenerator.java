@@ -6,9 +6,13 @@ import java.util.Map;
 
 public class MyMazeGenerator extends AMazeGenerator{
 
-    @Override
-    public Maze generate(int rows, int columns) {
 
+    @Override
+    public Maze generate(int rows, int columns) throws Exception {
+        if(rows <= 1 || columns <= 1)
+        {
+            throw new Exception("wrong num of rows/columns");
+        }
         int[][] map = resetMazeWithWalls(rows, columns);
         HashMap<Position,Integer> visited = new HashMap<>();
         Position start = getStartPos(map,rows,columns);
