@@ -12,11 +12,13 @@ public class RunSearchOnMaze3D {
 
     public static void main(String[] args) {
         IMaze3DGenerator mg = new MyMaze3DGenerator();
-        Maze3D maze = mg.generate(3,3,3);
+        Maze3D maze = mg.generate(100,100,100);
         SearchableMaze3D searchableMaze3D = new SearchableMaze3D(maze);
+        //System.out.println(mg.measureAlgorithmTimeMillis(80,80,80));
+        //maze.print();
         //solveProblem(searchableMaze3D, new BreadthFirstSearch());
-        solveProblem(searchableMaze3D, new DepthFirstSearch());
-        //solveProblem(searchableMaze3D , new BestFirstSearch());
+        //solveProblem(searchableMaze3D, new DepthFirstSearch());
+        solveProblem(searchableMaze3D , new BestFirstSearch());
     }
 
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm searcher)

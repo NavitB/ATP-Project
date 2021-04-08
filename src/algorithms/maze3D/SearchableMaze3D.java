@@ -50,28 +50,28 @@ public class SearchableMaze3D  implements ISearchable {
         {
             Position3D right = new Position3D(depth,row, col+1);
             Maze3DState rightS = new Maze3DState(right);
-            rightS.setCost(10 + S.getCost());
+            rightS.setCost(10);
             validStates.add(rightS);
         }
         if (col -1 >= 0 && map[depth][row][col - 1] == 0)
         {
             Position3D left = new Position3D(depth,row , col-1);
             Maze3DState leftS = new Maze3DState(left);
-            leftS.setCost(10 + S.getCost());
+            leftS.setCost(10);
             validStates.add(leftS);
         }
         if (row+1 < numOfRows && map[depth][row+1][col] == 0)
         {
             Position3D down = new Position3D(depth,row+1 , col);
             Maze3DState downS = new Maze3DState(down);
-            downS.setCost(10 + S.getCost());
+            downS.setCost(10);
             validStates.add(downS);
         }
         if (row-1 >=0 && map[depth][row-1][col]==0)
         {
             Position3D up = new Position3D(depth,row-1 , col);
             Maze3DState upS = new Maze3DState(up);
-            upS.setCost(10 + S.getCost());
+            upS.setCost(10);
             validStates.add(upS);
         }
     }
@@ -89,7 +89,7 @@ public class SearchableMaze3D  implements ISearchable {
         {
             Position3D down = new Position3D(depth-1,row , col);
             Maze3DState downS = new Maze3DState(down);
-            downS.setCost(10 + S.getCost());
+            downS.setCost(10);
             validStates.add(downS);
         }
     }

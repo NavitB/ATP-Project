@@ -19,7 +19,6 @@ public class MazeState extends AState{
         Position pos = (Position)((MazeState)obj).getState();
         Position thisPos = (Position) this.getState();
         return pos.equals(thisPos);
-       // return pos.getRowIndex() == thisPos.getRowIndex() && pos.getColumnIndex() == thisPos.getColumnIndex();
     }
 
     @Override
