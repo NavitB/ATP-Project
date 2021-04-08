@@ -82,7 +82,7 @@ public class SearchableMaze3D  implements ISearchable {
         {
             Position3D up = new Position3D(depth+1,row , col);
             Maze3DState upS = new Maze3DState(up);
-            upS.setCost(10 + S.getCost());
+            upS.setCost(10);
             validStates.add(upS);
         }
         if(depth-1 >=0 && map[depth-1][row][col] == 0)
