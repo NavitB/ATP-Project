@@ -11,8 +11,8 @@ public class RunMaze3DGenerator {
         public static void main(String[] args) throws Exception {
 
                 IMaze3DGenerator mg = new MyMaze3DGenerator();
-                Maze3D maze = mg.generate(20,20,20);
-                maze.print();
+                System.out.println(String.format("Maze generation time(ms): %s", mg.measureAlgorithmTimeMillis(100,100,100)));
+                Maze3D maze = mg.generate(100,100,100);
         }
 
 

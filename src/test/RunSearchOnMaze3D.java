@@ -12,7 +12,7 @@ public class RunSearchOnMaze3D {
 
     public static void main(String[] args) throws Exception {
         IMaze3DGenerator mg = new MyMaze3DGenerator();
-        Maze3D maze = mg.generate(20,20,20);
+        Maze3D maze = mg.generate(100,100,100);
         SearchableMaze3D searchableMaze3D = new SearchableMaze3D(maze);
         solveProblem(searchableMaze3D, new BreadthFirstSearch());
         solveProblem(searchableMaze3D, new DepthFirstSearch());

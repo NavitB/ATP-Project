@@ -43,7 +43,7 @@ public class MyMazeGenerator extends AMazeGenerator{
     {
         double rowS = Math.random() * rows;
         double colS = Math.random() * columns;
-        while ((int)rowS != 0 && (int)rowS != rows - 1 && (int)colS != 0 && (int)colS != columns-1 ) //if the start not on the frame
+        while ((int)colS != 0 ) //if the start not on the left
         {
             rowS = Math.random() * rows;
             colS = Math.random() * columns;
@@ -120,7 +120,7 @@ public class MyMazeGenerator extends AMazeGenerator{
     {
         int rowIndex = pos.getRowIndex();
         int colIndex = pos.getColumnIndex();
-        if(rowIndex == 0 || rowIndex == rows - 1 || colIndex == 0 || colIndex == columns-1 )
+        if(colIndex == columns-1 )
         {
             return pos != start;
         }
