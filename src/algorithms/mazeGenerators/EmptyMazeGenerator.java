@@ -9,7 +9,8 @@ public class EmptyMazeGenerator extends AMazeGenerator {
      */
     @Override
     public Maze generate(int rows, int columns) throws Exception {
-        if(rows <= 1 || columns <= 1)
+
+        if(rows <= 1 || columns <= 1) //if the size of the maze is not valid
         {
             throw new Exception("wrong num of rows/columns");
         }
@@ -18,7 +19,7 @@ public class EmptyMazeGenerator extends AMazeGenerator {
         {
             for(int j = 0; j < columns; j++)
             {
-                map[i][j] = 0;
+                map[i][j] = 0; //all the map is with zeros
             }
         }
         Position start = new Position(0,0);

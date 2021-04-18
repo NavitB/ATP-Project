@@ -1,6 +1,5 @@
 package algorithms.mazeGenerators;
 
-import java.util.Arrays;
 
 public class Maze {
 

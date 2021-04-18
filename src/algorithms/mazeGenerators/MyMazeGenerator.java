@@ -20,23 +20,23 @@ public class MyMazeGenerator extends AMazeGenerator{
         {
             throw new Exception("wrong num of rows/columns");
         }
-        int[][] map = resetMazeWithWalls(rows, columns);
+        int[][] map = resetMazeWithWalls(rows, columns); //starting with a maze only with walls
         HashSet<Position> visited = new HashSet<>();
-        Position start = getStartPos(map,rows,columns);
+        Position start = getStartPos(map,rows,columns); //random choose of the start position
         Position end = start;
         visited.add(start);
-        ArrayList<Position> walls = new ArrayList<>(neighborsWalls(map, getNeighbors(start.getRowIndex(), start.getColumnIndex(), rows, columns)));
+        ArrayList<Position> walls = new ArrayList<>(neighborsWalls(map, getNeighbors(start.getRowIndex(), start.getColumnIndex(), rows, columns))); //a list with walls, starting with the start position's neighbors
         while(!walls.isEmpty())
         {
-            int randomIndex = (int)(Math.random() * walls.size());
+            int randomIndex = (int)(Math.random() * walls.size()); //random choose of a wall from the list
             Position pos = walls.get(randomIndex);
             walls.remove(pos);
             visited.add(pos);
-            if(checkVisitedNeighbors(map,pos,visited))
+            if(checkVisitedNeighbors(map,pos,visited)) //check if only one neighbor of the chosen position is 0
             {
-                addToMaze(map,pos);
+                addToMaze(map,pos); //add this position to the maze (now it is 0)
                 walls.addAll(neighborsWalls(map,getNeighbors(pos.getRowIndex(),pos.getColumnIndex(),rows,columns))); //add neighbors walls
-                if(findGoalPos(pos,start,columns))
+                if(findGoalPos(pos,start,columns)) //check if it is a valid end position
                 {
                     end = pos;
                 }
@@ -77,7 +77,7 @@ public class MyMazeGenerator extends AMazeGenerator{
         {
             for(int j = 0; j < columns; j++)
             {
-                map[i][j] = 1;
+                map[i][j] = 1; //all the positions in the maze are walls
             }
         }
         return map;
@@ -88,7 +88,7 @@ public class MyMazeGenerator extends AMazeGenerator{
      * @param colIndex index of a specific column
      * @param rows num of rows
      * @param columns num of columns
-     * @return array list of positions
+     * @return array list of positions of the neighbors
      */
     private ArrayList<Position> getNeighbors(int rowIndex, int colIndex , int rows, int columns)
     {
@@ -118,8 +118,8 @@ public class MyMazeGenerator extends AMazeGenerator{
 
     /**
      * @param map 2D array of integers
-     * @param neighbors array list of positions that symbol the neighbors
-     * @return array list of positions
+     * @param neighbors array list of positions that are the neighbors
+     * @return array list of positions that are neighbors and walls
      */
     private ArrayList<Position> neighborsWalls (int[][] map, ArrayList<Position> neighbors)
     {
@@ -147,7 +147,7 @@ public class MyMazeGenerator extends AMazeGenerator{
         for(Position p : neighbors)
         {
             if(visited.contains(p))
-                totalVisited++;
+                totalVisited++; //counting number of visited neighbors
         }
         return totalVisited == 1;
     }
@@ -164,7 +164,7 @@ public class MyMazeGenerator extends AMazeGenerator{
         int colIndex = pos.getColumnIndex();
         if(colIndex == columns-1 )
         {
-            return pos != start;
+            return pos != start; //check if current position is not the start
         }
         return false;
     }
@@ -177,6 +177,6 @@ public class MyMazeGenerator extends AMazeGenerator{
     {
         int rowIndex = pos.getRowIndex();
         int colIndex = pos.getColumnIndex();
-        map[rowIndex][colIndex] = 0;
+        map[rowIndex][colIndex] = 0; //changing the position to a valid transition
     }
 }

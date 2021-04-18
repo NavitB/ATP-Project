@@ -30,7 +30,7 @@ public class SimpleMazeGenerator extends AMazeGenerator{
             for (int j = 0 ; j < rows -1 ; j ++ )
             {
                 double randomNum = Math.random();
-                if (randomNum > 0.5)
+                if (randomNum > 0.5) //random choose of zeros and ones
                 {
                     map[i][j] = 0;
                 }
