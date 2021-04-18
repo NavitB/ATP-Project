@@ -124,4 +124,13 @@ class BestFirstSearchTest {
             assertTrue(goalBFS.getCost() >= goalBest.getCost());
         }
     }
+
+    @Test
+    void checkIfThrowingNull()
+    {
+        BestFirstSearch bestFirstSearch = new BestFirstSearch();
+        Exception exception = assertThrows(Exception.class, () -> bestFirstSearch.solve(null));
+        assertEquals("searchable is null",exception.getMessage());
+
+    }
 }

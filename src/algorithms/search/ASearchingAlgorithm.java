@@ -19,15 +19,22 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     public void setNumOfVisited(int numOfVisited) {
         this.numOfVisited = numOfVisited;
     }
+
+
+    /**
+     * @param start the start state
+     * @param goal the goal state
+     * @param path a list to update with all the states that in the path from start to goal
+     */
     protected void restorePath(AState start,AState goal, ArrayList<AState> path)
     {
-        if (goal == start)
+        AState temp = goal;
+        while (!temp.equals(start))
         {
-            path.add(0,start);
-            return;
+            path.add(0,temp);
+            temp = temp.getCameFrom();
         }
-        path.add(0,goal);
-        restorePath(start,goal.getCameFrom(),path);
+        path.add(0,start);
     }
 
 

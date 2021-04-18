@@ -1,12 +1,16 @@
 package algorithms.search;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
 
 public class DepthFirstSearch extends ASearchingAlgorithm
 {
+    /**
+     * @param s searchble problem
+     * @return solution to the problem
+     * @throws Exception if the problem is null
+     */
     @Override
     public Solution solve(ISearchable s) throws Exception {
         if(s == null)
@@ -19,6 +23,12 @@ public class DepthFirstSearch extends ASearchingAlgorithm
         return new Solution(path);
     }
 
+    /**
+     * DFS search on the searchable problem to update the "came from" for each state
+     * @param problem a searchable problem
+     * @param start the start state
+     * @param goal the goal state
+     */
     private void iterativeDFS(ISearchable problem, AState start, AState goal)
     {
         AState v;
