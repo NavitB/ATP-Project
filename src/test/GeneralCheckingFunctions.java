@@ -7,4 +7,11 @@ public class GeneralCheckingFunctions {
         boolean weChoseToDoTheMaze3DAssignment = true;
         return weChoseToDoTheMaze3DAssignment;
     }
+
+    public static String getGithubLink()
+    {
+        String githubLink = "https://github.com/NavitB/ATP-Project";
+        return githubLink;
+    }
+
 }
