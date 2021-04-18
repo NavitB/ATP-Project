@@ -8,6 +8,13 @@ import java.util.HashMap;
 
 public class MyMaze3DGenerator extends AMaze3DGenerator{
 
+    /**
+     * @param depth the depth of the maze
+     * @param row num rows
+     * @param column num of columns
+     * @return new 3D mazr
+     * @throws Exception if the size of the maze is not valid
+     */
     @Override
     public Maze3D generate(int depth, int row, int column) throws Exception {
         if(depth <= 1|| row <= 1 || column <= 1)
@@ -39,6 +46,14 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         Maze3D newMaze = new Maze3D(map,start,end);
         return newMaze;
     }
+
+    /**
+     * @param map 3D array of integers that represents the maze
+     * @param depth the depth of the maze
+     * @param rows num of rows
+     * @param columns num of columns
+     * @return 3D position that represents the start position
+     */
     private Position3D getStartPos (int[][][] map,int depth,int rows,int columns)
     {
         double depthS = Math.random() * depth;
@@ -53,7 +68,12 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         map[(int)depthS][(int)rowS][(int)colS] = 0;
         return new Position3D((int)depthS,(int)rowS, (int)colS);
     }
-
+    /**
+     * @param depth the depth of the maze
+     * @param rows num of rows
+     * @param columns num of columns
+     * @return 3D array of integers
+     */
     private int[][][] resetMazeWithWalls(int depth,int rows, int columns)
     {
         int[][][] map = new int[depth][rows][columns];
@@ -67,7 +87,15 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         }
         return map;
     }
-
+    /**
+     * @param depthIndex index of a specific depth
+     * @param rowIndex index of a specific row
+     * @param colIndex index of a specific column
+     * @param rows num of rows
+     * @param columns num of columns
+     * @param depth num of depths
+     * @return array list of 3D positions
+     */
     private ArrayList<Position3D> getNeighbors(int depthIndex,int rowIndex, int colIndex ,int depth, int rows, int columns)
     {
         ArrayList<Position3D> neighbors = new ArrayList<>();
@@ -104,6 +132,11 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         return neighbors;
     }
 
+    /**
+     * @param map 3D array of integers that represent the maze
+     * @param neighbors array list of 3D positions that represent the neighbors
+     * @return
+     */
     private ArrayList<Position3D> ifWalls (int[][][] map, ArrayList<Position3D> neighbors)
     {
         ArrayList<Position3D> neighborWalls = new ArrayList<>();

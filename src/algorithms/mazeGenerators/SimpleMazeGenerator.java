@@ -2,6 +2,12 @@ package algorithms.mazeGenerators;
 
 public class SimpleMazeGenerator extends AMazeGenerator{
 
+    /**
+     * @param rows num of rows
+     * @param columns num of columns
+     * @return a new maze
+     * @throws Exception if the size of the maze is not valid
+     */
     @Override
     public Maze generate(int rows, int columns) throws Exception {
         if(rows <= 1 || columns <= 1)
