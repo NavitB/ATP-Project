@@ -137,7 +137,7 @@ public class MyMazeGenerator extends AMazeGenerator{
     /**
      * @param map 2D array of integers
      * @param pos Position
-     * @param visited hash map of positions we visited
+     * @param visited hash set of positions we visited
      * @return boolean value if we visited only in one neighbors
      */
     private boolean checkVisitedNeighbors (int[][]map, Position pos, HashSet<Position> visited)

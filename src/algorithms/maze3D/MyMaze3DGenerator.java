@@ -5,6 +5,7 @@ import algorithms.mazeGenerators.Position;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class MyMaze3DGenerator extends AMaze3DGenerator{
 
@@ -21,23 +22,23 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         {
             throw new Exception("wrong num of depth/rows/columns");
         }
-        int[][][] map = resetMazeWithWalls(depth ,row, column);
-        HashMap<Position3D,Integer> visited = new HashMap<>();
-        Position3D start = getStartPos(map,depth,row,column);
+        int[][][] map = resetMazeWithWalls(depth ,row, column); //starting with a maze only with walls
+        HashSet<Position3D> visited = new HashSet<>();
+        Position3D start = getStartPos(map,depth,row,column); //random choose of the start position
         Position3D end = start;
-        visited.put(start,1);
-        ArrayList<Position3D> walls = new ArrayList<>(ifWalls(map, getNeighbors(start.getDepthIndex(), start.getRowIndex(), start.getColumnIndex(),depth, row, column)));
+        visited.add(start);
+        ArrayList<Position3D> walls = new ArrayList<>(ifWalls(map, getNeighbors(start.getDepthIndex(), start.getRowIndex(), start.getColumnIndex(),depth, row, column))); //a list with walls, starting with the start position's neighbors
         while(!walls.isEmpty())
         {
-            int randomIndex = (int)(Math.random() * walls.size());
+            int randomIndex = (int)(Math.random() * walls.size()); //random choose of a wall from the list
             Position3D pos = walls.get(randomIndex);
             walls.remove(pos);
-            visited.put(pos,1);
-            if(checkVisitedNeighbors(map,pos,visited))
+            visited.add(pos);
+            if(checkVisitedNeighbors(map,pos,visited)) //check if only one neighbor of the chosen position is 0
             {
-                addToMaze(map,pos);
+                addToMaze(map,pos); //add this position to the maze (now it is 0)
                 walls.addAll(ifWalls(map,getNeighbors(pos.getDepthIndex(),pos.getRowIndex(),pos.getColumnIndex(),depth,row,column))); //add neighbors walls
-                if(findGoalPos(pos,start,row,column))
+                if(findGoalPos(pos,start,column)) //check if it is a valid end position
                 {
                     end = pos;
                 }
@@ -59,7 +60,7 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         double depthS = Math.random() * depth;
         double rowS = Math.random() * rows;
         double colS = Math.random() * columns;
-        while ((int)colS != 0 ) //if the start not on the frame
+        while ((int)colS != 0 ) //if the start not on the left
         {
             depthS = Math.random() * depth;
             rowS = Math.random() * rows;
@@ -82,7 +83,7 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
             for(int j = 0; j < rows; j++)
             {
                 for(int k = 0; k < columns; k++ )
-                map[i][j][k] = 1;
+                map[i][j][k] = 1; //all the positions in the maze are walls
             }
         }
         return map;
@@ -135,7 +136,7 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
     /**
      * @param map 3D array of integers that represent the maze
      * @param neighbors array list of 3D positions that represent the neighbors
-     * @return
+     * @return array list of 3D position
      */
     private ArrayList<Position3D> ifWalls (int[][][] map, ArrayList<Position3D> neighbors)
     {
@@ -150,36 +151,48 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         }
         return neighborWalls;
     }
-
-    private boolean checkVisitedNeighbors (int[][][]map, Position3D pos, HashMap<Position3D,Integer> visited)
+    /**
+     * @param map 3D array of integers
+     * @param pos 3D Position
+     * @param visited hash set of 3D positions we visited
+     * @return boolean value if we visited only in one neighbors
+     */
+    private boolean checkVisitedNeighbors (int[][][]map, Position3D pos, HashSet<Position3D> visited)
     {
         ArrayList<Position3D> neighbors = getNeighbors(pos.getDepthIndex(),pos.getRowIndex(), pos.getColumnIndex(),map.length,map[0].length, map[0][0].length);
         int totalVisited = 0;
         for(Position3D p : neighbors)
         {
-            if(visited.containsKey(p))
-                totalVisited++;
+            if(visited.contains(p))
+                totalVisited++; //counting number of visited neighbors
         }
         return totalVisited == 1;
     }
-
-    private boolean findGoalPos (Position3D pos,Position3D start,int rows, int columns)
+    /**
+     * @param pos the position we will check if it is a valid goal position
+     * @param start the start position
+     * @param columns num of columns
+     * @return boolean value if is a valid goal position
+     */
+    private boolean findGoalPos (Position3D pos,Position3D start, int columns)
     {
-        int rowIndex = pos.getRowIndex();
         int colIndex = pos.getColumnIndex();
         if( colIndex == columns-1 )
         {
-            return pos != start;
+            return pos != start;  //check if current position is not the start
         }
         return false;
     }
-
+    /**
+     * @param map 3D array of integers, the maze
+     * @param pos the 3D position we want to add to the maze
+     */
     private void addToMaze(int[][][] map, Position3D pos)
     {
         int depthIndex = pos.getDepthIndex();
         int rowIndex = pos.getRowIndex();
         int colIndex = pos.getColumnIndex();
-        map[depthIndex][rowIndex][colIndex] = 0;
+        map[depthIndex][rowIndex][colIndex] = 0; //changing the position to a valid transition
     }
 
 

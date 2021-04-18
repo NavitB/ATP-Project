@@ -13,22 +13,35 @@ public class SearchableMaze3D  implements ISearchable {
     private Maze3DState startState;
     private Maze3DState goalState;
 
+    /**
+     * @param m naze 3D
+     */
     public SearchableMaze3D(Maze3D m) {
         M = m;
         startState = new Maze3DState(M.getStartPosition());
         goalState= new Maze3DState(M.getGoalPosition());
     }
 
+    /**
+     * @return AState the represents the start state
+     */
     @Override
     public AState getStartState() {
         return startState;
     }
 
+    /**
+     * @return AState the represents the goal state
+     */
     @Override
     public AState getGoalState() {
         return goalState;
     }
 
+    /**
+     * @param S AState the represent the current position
+     * @return array list of AState the symbol the all possible states
+     */
     @Override
     public ArrayList<AState> getAllSuccessors(AState S) {
         int[][][] map = M.getMap();
@@ -39,12 +52,21 @@ public class SearchableMaze3D  implements ISearchable {
         int numOfDepth = map.length;
         int numOfRows = map[0].length;
         int numOfCol = map[0][0].length;
-        this.getSide(S,depth,row ,col, numOfDepth ,numOfRows ,numOfCol ,map, validStates);
-        this.getDimension(S,depth,row ,col, numOfDepth ,numOfRows ,numOfCol ,map, validStates);
+        this.getSide(depth,row ,col ,numOfRows ,numOfCol ,map, validStates);
+        this.getDimension(depth,row ,col, numOfDepth,map, validStates);
         return validStates;
     }
 
-    private void getSide(AState S,int depth,int row, int col,int numOfDepth, int numOfRows, int numOfCol, int[][][] map, ArrayList<AState> validStates)
+    /**
+     * @param depth depth index
+     * @param row row index
+     * @param col columns index
+     * @param numOfRows num of rows
+     * @param numOfCol num of columns
+     * @param map 3D array of integers that represent the maze
+     * @param validStates array list of AState that represent the valid states
+     */
+    private void getSide(int depth,int row, int col, int numOfRows, int numOfCol, int[][][] map, ArrayList<AState> validStates)
     {
         if (col+1 < numOfCol && map[depth][row][col+1] == 0)
         {
@@ -76,7 +98,15 @@ public class SearchableMaze3D  implements ISearchable {
         }
     }
 
-    private void getDimension(AState S,int depth,int row, int col,int numOfDepth, int numOfRows, int numOfCol, int[][][] map, ArrayList<AState> validStates)
+    /**
+     * @param depth index of depth
+     * @param row index of row
+     * @param col index of column
+     * @param numOfDepth num of depth
+     * @param map 3D array of integers that represnt the maze
+     * @param validStates array list of AState that represent the valid states
+     */
+    private void getDimension(int depth,int row, int col,int numOfDepth, int[][][] map, ArrayList<AState> validStates)
     {
         if(depth+1 < numOfDepth && map[depth+1][row][col] == 0)
         {
