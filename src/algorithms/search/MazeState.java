@@ -6,6 +6,10 @@ public class MazeState extends AState{
 
     private Position state;
 
+    /**
+     * constructor
+     * @param state each maze state has a position in the maze
+     */
     public MazeState(Position state) {
         this.state = state;
     }

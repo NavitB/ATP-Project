@@ -13,7 +13,7 @@ public class RunSearchOnMaze {
         IMazeGenerator mg = new MyMazeGenerator();
         Maze maze = mg.generate(30, 30);
         SearchableMaze searchableMaze = new SearchableMaze(maze);
-
+        maze.print();
         solveProblem(searchableMaze, new BreadthFirstSearch());
         solveProblem(searchableMaze, new DepthFirstSearch());
         solveProblem(searchableMaze , new BestFirstSearch());

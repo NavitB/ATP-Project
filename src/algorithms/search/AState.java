@@ -2,13 +2,11 @@ package algorithms.search;
 
 
 public abstract class AState{
-    //private Object state;
     private AState cameFrom;
     private double cost;
 
     public AState()
     {
-        //this.state = state;
         this.cost = 0;
     }
 
@@ -20,9 +18,7 @@ public abstract class AState{
         return cameFrom;
     }
 
-//    public Object getState() {
-//        return state;
-//    }
+
 
     public void setCameFrom(AState cameFrom) {
         this.cameFrom = cameFrom;

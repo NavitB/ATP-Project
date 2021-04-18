@@ -5,10 +5,18 @@ import java.util.*;
 public class BreadthFirstSearch extends ASearchingAlgorithm{
     protected Queue<AState> queue;
 
+    /**
+     * constructor
+     */
     public BreadthFirstSearch() {
         this.queue = new LinkedList<>();
     }
 
+    /**
+     * @param s searchable problem
+     * @return a solution to the problem
+     * @throws Exception if the searchable problem is null
+     */
     @Override
     public Solution solve(ISearchable s) throws Exception {
         if(s == null)
@@ -20,6 +28,13 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         restorePath(s.getStartState(),s.getGoalState(),path);
         return new Solution(path);
     }
+
+    /**
+     * BFS search on the searchable problem to update the "came from" for each state
+     * @param problem searchable problem
+     * @param start the start state of the problem
+     * @param goal the end state of the problem
+     */
     private void BFS(ISearchable problem, AState start, AState goal )
     {
         HashSet<AState> visited = new HashSet<>();
@@ -45,6 +60,13 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         }
     }
 
+    /**
+     * a function to insert to the queue in the BFS search
+     * @param state one of the successors state
+     * @param start current state
+     * @param visited a set of all the visited states
+     * @param min map of each state and it's minimum cost (not relevant to BFS)
+     */
     protected void insertToQueue(AState state,AState start, HashSet<AState> visited, HashMap<AState,Double> min)
     {
         if(!visited.contains(state))
