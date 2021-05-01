@@ -1,7 +1,10 @@
 package test;
 
+import IO.SimpleCompressorOutputStream;
 import algorithms.mazeGenerators.*;
 
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
 public class RunMazeGenerator {
@@ -19,8 +22,8 @@ public class RunMazeGenerator {
         System.out.println(String.format("Start Position: %s", startPosition));
         System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
         System.out.println("the byte array is: " + Arrays.toString(maze.toByteArray()));
-        Maze newMaze = new Maze(maze.toByteArray());
-        newMaze.print();
+        //OutputStream output = new Out
+        //SimpleCompressorOutputStream Stream = new SimpleCompressorOutputStream();
     }
 
 }
