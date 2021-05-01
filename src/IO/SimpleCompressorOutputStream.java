@@ -23,7 +23,11 @@ public class SimpleCompressorOutputStream extends OutputStream {
             index = writeMetaData(b,index);
         }
         int currentNum =1;
-        while (index<b.length)
+        if(b[index] == 0)
+        {
+            out.write(0);
+        }
+        while (index + 1 < b.length)
         {
             if(b[index]==currentNum)
             {
@@ -36,6 +40,10 @@ public class SimpleCompressorOutputStream extends OutputStream {
                     currentNum=1;
             }
         }
+        if(b[b.length-1] == 1 && b[b.length-2] != 1)
+        {
+            out.write(1);
+        }
     }
 
     private int writeMaze(byte[] b , int index, int currentNum) throws IOException {
@@ -43,7 +51,10 @@ public class SimpleCompressorOutputStream extends OutputStream {
         while(b[index]==currentNum)
         {
             sum++;
-            index++;
+            if(index + 1 < b.length)
+                index++;
+            else
+                break;
         }
         if(sum<=255)
         {

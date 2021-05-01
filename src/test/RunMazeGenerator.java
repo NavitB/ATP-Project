@@ -21,7 +21,7 @@ public class RunMazeGenerator {
         Position startPosition = maze.getStartPosition();
         System.out.println(String.format("Start Position: %s", startPosition));
         System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
-        System.out.println("the byte array is: " + Arrays.toString(maze.toByteArray()));
+        //System.out.println("the byte array is: " + Arrays.toString(maze.toByteArray()));
         //OutputStream output = new Out
         //SimpleCompressorOutputStream Stream = new SimpleCompressorOutputStream();
     }
