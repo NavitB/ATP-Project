@@ -3,6 +3,7 @@ package Server;
 import java.lang.reflect.Executable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,6 +22,10 @@ public class Server {
     }
 
     public void start(){
+        new Thread(() -> {this.runServer();
+        }).start();
+    }
+    public void runServer(){
         try{
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalsMS);
@@ -32,6 +37,7 @@ public class Server {
                 }
                 catch (Exception e)
                 {
+                    //System.out.println("socket timeout");
                     e.printStackTrace();
                 }
             }
