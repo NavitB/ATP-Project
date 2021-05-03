@@ -8,25 +8,26 @@ import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy{
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
         try{
             ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
-            SimpleCompressorOutputStream toClient = new SimpleCompressorOutputStream(outToClient);
+            ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
+            //SimpleCompressorOutputStream toClient = new SimpleCompressorOutputStream(outToClient);
             int[] rowsCols = (int[])fromClient.readObject();
             int rows = rowsCols[0];
             int cols = rowsCols[1];
             MyMazeGenerator mazeGenerator = new MyMazeGenerator();
             Maze maze = mazeGenerator.generate(rows,cols);
             byte[] mazeInBytes = maze.toByteArray();
-            toClient.write(mazeInBytes);
-            toClient.flush();
+            ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+            SimpleCompressorOutputStream out = new SimpleCompressorOutputStream(byteArrayOut);
+            out.write(mazeInBytes);
+            out.flush();
+            toClient.writeObject(byteArrayOut.toByteArray());
             fromClient.close();
             toClient.close();
 

@@ -22,7 +22,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             DepthFirstSearch depthFirstSearch = new DepthFirstSearch();
             Solution solution = depthFirstSearch.solve(searchableMaze);
             toClient.writeObject(solution);
-            toClient.flush();
+           // toClient.flush();
             fromClient.close();
             toClient.close();
         }

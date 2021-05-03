@@ -3,6 +3,7 @@ package Server;
 import java.lang.reflect.Executable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.sql.SQLOutput;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,12 +34,13 @@ public class Server {
             {
                 try{
                     Socket clientSocket = serverSocket.accept();
+                    System.out.println("Client accepted : " + clientSocket.toString());
                     threadPool.submit(()-> handleClient(clientSocket));
                 }
-                catch (Exception e)
+                catch (SocketTimeoutException e)
                 {
-                    //System.out.println("socket timeout");
-                    e.printStackTrace();
+                    System.out.println("socket timeout");
+                   // e.printStackTrace();
                 }
             }
             serverSocket.close();
