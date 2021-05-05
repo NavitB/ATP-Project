@@ -17,7 +17,7 @@ public class RunCompressDecompressMaze {
     public static void main(String[] args) throws Exception {
         String mazeFileName = "savedMaze.maze";
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
-        Maze maze = mazeGenerator.generate(20,8);
+        Maze maze = mazeGenerator.generate(1000,1000);
 //       int[][] map = {{0, 0, 1, 1, 1},{1, 0, 1, 1, 1},{1, 0, 1, 1, 1},{0, 0, 0, 0, 1},{1, 0, 1, 0, 0}};
 //        Position start = new Position(3,0);
 //        Position end = new Position(4,4);
@@ -39,7 +39,7 @@ public class RunCompressDecompressMaze {
         {
             InputStream in = new MyDecompressorInputStream(new FileInputStream(mazeFileName));
             savedMazeBytes = new byte[maze.toByteArray().length];
-            System.out.println(Arrays.toString(maze.toByteArray()));
+            //System.out.println(Arrays.toString(maze.toByteArray()));
 
             in.read(savedMazeBytes);
             in.close();

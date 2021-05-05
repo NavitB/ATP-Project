@@ -30,8 +30,8 @@ public class MyCompressorOutputStream extends OutputStream {
     }
     private void writeMaze(byte[] b , int index) throws IOException {
         String binaryNum = "";
-        int numOfNewBytes = (b.length - index+1) / 8;
-        if((b.length - index+1) % 8 != 0)
+        int numOfNewBytes = (b.length - index) / 8;
+        if((b.length - index) % 8 != 0)
         {
             numOfNewBytes ++;
         }

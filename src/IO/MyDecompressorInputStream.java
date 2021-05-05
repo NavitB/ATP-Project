@@ -23,13 +23,13 @@ public class MyDecompressorInputStream extends InputStream {
         index = readMetaData(bCompressed,index,b);
         for(int i=0; i < index; i++)
         {
-            rows += bCompressed[i];
+            rows += Byte.toUnsignedInt((Byte)bCompressed[i]);
         }
         int tempIndex = index;
         index = readMetaData(bCompressed,index,b);
         for(int i = tempIndex ; i < index; i++)
         {
-            cols += bCompressed[i];
+            cols += Byte.toUnsignedInt((Byte)bCompressed[i]);
         }
         index = 0;
         int mazeLength = rows * cols;
