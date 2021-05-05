@@ -9,6 +9,7 @@ import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
 
@@ -16,6 +17,10 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 public class RunCommunicateWithServers {
     public static void main(String[] args) {
@@ -33,6 +38,80 @@ public class RunCommunicateWithServers {
         solveSearchProblemServer.stop();
         //stringReverserServer.stop();
     }
+//public static void main(String[] args) {
+////Initializing servers
+//    Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+//    Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+////Starting servers
+//    //solveSearchProblemServer.start();
+//    mazeGeneratingServer.start();
+////        Thread t = new Thread(() -> mazeGeneratingServer.start());
+////        t.start();
+////        try {
+////            Thread.sleep(5000);
+////        } catch (InterruptedException e) {
+////            e.printStackTrace();
+////        }
+//    for (int j = 0; j < 10; j++) {
+//        Thread a = new Thread(() -> CommunicateWithServer_MazeGenerating());
+//        a.start();
+//    }
+////    for (int i = 0; i < 10; i++) {
+////        Thread b = new Thread(() -> CommunicateWithServer_SolveSearchProblem());
+////        b.start();
+////    }
+//
+//
+//
+//
+////        CommunicateWithServer_SolveSearchProblem();
+//
+//
+////
+//
+////Stopping all servers
+//    //mazeGeneratingServer.stop();
+//    //solveSearchProblemServer.stop();
+////        Scanner s = new Scanner(System.in);
+////        while (true){
+////            try {
+////                Thread.sleep(1000);
+////            } catch (InterruptedException e) {
+////                e.printStackTrace();
+////            }
+////            if(s.nextLine().equals("exit"))
+////            break;
+////        }
+////        mazeGeneratingServer.stop();
+////        try {
+////            Thread.sleep(5000);
+////        } catch (InterruptedException e) {
+////            e.printStackTrace();
+////        }
+////        Thread b = new Thread(() -> solveSearchProblemServer.start());
+////        b.start();
+////        try {
+////            Thread.sleep(5000);
+////        } catch (InterruptedException e) {
+////            e.printStackTrace();
+////        }
+////        Thread c = new Thread(() -> CommunicateWithServer_SolveSearchProblem());
+////        c.start();
+//    Scanner s = new Scanner(System.in);
+//    while (true){
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        if(s.nextLine().equals("e"))
+//            break;
+//    }
+//    //solveSearchProblemServer.stop();
+//    mazeGeneratingServer.stop();
+//
+//
+//}
 
     private static void CommunicateWithServer_MazeGenerating() {
         try {
@@ -50,8 +129,8 @@ public class RunCommunicateWithServers {
                         toServer.flush();
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed withMyCompressor) from server
                         //InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        InputStream is = new SimpleDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        byte[] decompressedMaze = new byte[1000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
+                        InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
+                        byte[] decompressedMaze = new byte[37 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         Maze maze = new Maze(decompressedMaze);
                         maze.print();
