@@ -18,10 +18,7 @@ public class RunCompressDecompressMaze {
         String mazeFileName = "savedMaze.maze";
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
         Maze maze = mazeGenerator.generate(1000,1000);
-//       int[][] map = {{0, 0, 1, 1, 1},{1, 0, 1, 1, 1},{1, 0, 1, 1, 1},{0, 0, 0, 0, 1},{1, 0, 1, 0, 0}};
-//        Position start = new Position(3,0);
-//        Position end = new Position(4,4);
-//        Maze maze = new Maze(start,end,map);
+
 
 
         try{

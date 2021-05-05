@@ -35,7 +35,7 @@ public class Server {
             {
                 try{
                     Socket clientSocket = serverSocket.accept();
-                    //System.out.println("Client accepted : " + clientSocket.toString());
+                    System.out.println("Client accepted : " + clientSocket.toString());
                     threadPool.submit(()-> handleClient(clientSocket));
                 }
                 catch (SocketTimeoutException e)
@@ -45,7 +45,7 @@ public class Server {
                 }
             }
             serverSocket.close();
-            threadPool.shutdownNow();
+            threadPool.shutdown();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -55,6 +55,7 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try{
             strategy.applyStrategy(clientSocket.getInputStream() , clientSocket.getOutputStream());
+            System.out.println("Done handeling client: " +clientSocket.toString());
             clientSocket.close();
         }
         catch (Exception e)
