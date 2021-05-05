@@ -19,7 +19,8 @@ public class Server {
         this.port = port;
         this.listeningIntervalsMS = listeningIntervalsMS;
         this.strategy = strategy;
-        this.threadPool = Executors.newFixedThreadPool(2);
+        this.threadPool= Executors.newFixedThreadPool(Integer.parseInt(Configurations.getConf().getNumOfThreads()));
+        //this.threadPool = Executors.newFixedThreadPool(2);
     }
 
     public void start(){
@@ -34,7 +35,7 @@ public class Server {
             {
                 try{
                     Socket clientSocket = serverSocket.accept();
-                    System.out.println("Client accepted : " + clientSocket.toString());
+                    //System.out.println("Client accepted : " + clientSocket.toString());
                     threadPool.submit(()-> handleClient(clientSocket));
                 }
                 catch (SocketTimeoutException e)

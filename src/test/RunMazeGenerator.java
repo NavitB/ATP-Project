@@ -10,13 +10,13 @@ import java.util.Arrays;
 public class RunMazeGenerator {
     public static void main(String[] args) throws Exception {
 //        testMazeGenerator(new EmptyMazeGenerator());
-//        testMazeGenerator(new SimpleMazeGenerator());
-        testMazeGenerator(new MyMazeGenerator());
+        testMazeGenerator(new SimpleMazeGenerator());
+        //testMazeGenerator(new MyMazeGenerator());
 
     }
     private static void testMazeGenerator(IMazeGenerator mazeGenerator) throws Exception {
         System.out.println(String.format("Maze generation time(ms): %s", mazeGenerator.measureAlgorithmTimeMillis(100,100)));
-        Maze maze = mazeGenerator.generate(300,300);
+        Maze maze = mazeGenerator.generate(20,50);
         maze.print();
         Position startPosition = maze.getStartPosition();
         System.out.println(String.format("Start Position: %s", startPosition));

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) throws Exception {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(30, 30);
+        Maze maze = mg.generate(50, 20);
         SearchableMaze searchableMaze = new SearchableMaze(maze);
         maze.print();
         solveProblem(searchableMaze, new BreadthFirstSearch());

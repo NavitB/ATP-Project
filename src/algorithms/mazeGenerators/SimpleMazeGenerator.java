@@ -23,11 +23,11 @@ public class SimpleMazeGenerator extends AMazeGenerator{
         }
         for (int j = 0 ; j < rows ; j++)
         {
-            map[columns-1][j] = 0;
+            map[j][columns-1] = 0;
         }
-        for (int i = 1 ; i < columns-1 ; i ++)
+        for (int i = 1 ; i < rows-1 ; i ++)
         {
-            for (int j = 0 ; j < rows -1 ; j ++ )
+            for (int j = 0 ; j < columns -1 ; j ++ )
             {
                 double randomNum = Math.random();
                 if (randomNum > 0.5) //random choose of zeros and ones
