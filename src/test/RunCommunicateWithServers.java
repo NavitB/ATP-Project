@@ -156,7 +156,11 @@ public class RunCommunicateWithServers {
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
                         MyMazeGenerator mg = new MyMazeGenerator();
-                        Maze maze = mg.generate(5, 5);
+                        int[][] map = {{0,0,0,0,0},{0,0,0,1,0},{0,0,0,1,0},{1,0,0,0,0}};
+                        Position start = new Position(0,0);
+                        Position end = new Position(2,4);
+                        Maze maze = new Maze(start,end,map);
+                        //Maze maze = mg.generate(5, 5);
                         //maze.print();
                         toServer.writeObject(maze); //send maze to server
                         toServer.flush();

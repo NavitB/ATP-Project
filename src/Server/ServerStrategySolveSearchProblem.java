@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
-    static private AtomicInteger counter = new AtomicInteger(0);
+    static private AtomicInteger count = new AtomicInteger(0);
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
         try{
@@ -28,7 +28,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             //check if size folder is exist
             if(checkDir)
             {
-                boolean checkFile = new File(tempDirectoryPath + "\\" + folderName + "\\PathsToSol", fileNameToPath).exists();
+                boolean checkFile = new File(tempDirectoryPath + "\\" + folderName + "\\PathsToSol\\"+ fileNameToPath).exists();
                 if (checkFile)
                 {
                     //reading solution from existing file
@@ -80,12 +80,13 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
     private Solution getSolutionPath(Maze maze, String tempDirectoryPath, String folderName, String fileNameToPath) throws Exception {
         Solution solution;
-        String solPathFile = tempDirectoryPath+"\\"+folderName +"\\"+ "PathsToSol"+ "\\" + fileNameToPath;
-        String solPath = tempDirectoryPath+"\\"+folderName +"\\"+ "Solutions" + "\\" + "Sol_" + counter;
+        String solPathFile = tempDirectoryPath+folderName +"\\"+ "PathsToSol"+ "\\" + fileNameToPath;
+        int solCounter = count.getAndIncrement();
+        String solPath = tempDirectoryPath+"\\"+folderName +"\\"+ "Solutions" + "\\" +fileNameToPath+ "Sol_" + solCounter;
         FileOutputStream fileOut = new FileOutputStream(solPathFile);
         ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
         objectOut.writeObject(solPath);
-        solution = createSolution( maze, tempDirectoryPath,folderName + "\\Solutions", "Sol_" + counter);
+        solution = createSolution( maze, tempDirectoryPath,folderName + "\\Solutions", fileNameToPath+"Sol_" + count);
         return solution;
     }
 
@@ -109,7 +110,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
         }
         Solution solution = searcher.solve(searchableMaze);
         String newDir = tempDirectoryPath+ "\\" + folderName + "\\" + fileName;
-        counter.getAndIncrement();
         FileOutputStream fileOut = new FileOutputStream(newDir);
         ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
         objectOut.writeObject(solution);
