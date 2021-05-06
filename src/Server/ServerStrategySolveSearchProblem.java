@@ -109,6 +109,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
         }
         Solution solution = searcher.solve(searchableMaze);
         String newDir = tempDirectoryPath+ "\\" + folderName + "\\" + fileName;
+        counter.getAndIncrement();
         FileOutputStream fileOut = new FileOutputStream(newDir);
         ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
         objectOut.writeObject(solution);
