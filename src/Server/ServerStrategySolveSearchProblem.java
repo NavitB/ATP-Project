@@ -19,7 +19,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             System.out.println(tempDirectoryPath);
             int rows = maze.getMaze().length;
             int cols = maze.getMaze()[0].length;
-            String folderName = rows + "*" + cols;
+            String folderName = rows + "_" + cols;
             int fileNameInt = Arrays.hashCode((maze.toByteArray()));
             String fileName = Integer.toString(fileNameInt);
             boolean checkDir = new File(tempDirectoryPath,folderName).exists();
@@ -44,12 +44,12 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             }
             else
             {
-                File newDir = new File(tempDirectoryPath ,folderName);
-                boolean ifCreated = newDir.mkdir();
+                boolean ifCreated = new File(tempDirectoryPath+"\\"+folderName).mkdir();
                 if (ifCreated)
                 {
-                    solution = createSolution( maze, newDir.getPath(), fileName);
-                    FileOutputStream fileOut = new FileOutputStream(newDir.getPath() + "\\" + fileName);
+                    String newDir = tempDirectoryPath+"\\"+folderName;
+                    solution = createSolution( maze, newDir, fileName);
+                    FileOutputStream fileOut = new FileOutputStream(newDir + "\\" + fileName);
                     ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
                     objectOut.writeObject(solution);
                     objectOut.close();
