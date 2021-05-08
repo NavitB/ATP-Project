@@ -124,14 +124,14 @@ public class RunCommunicateWithServers {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        int[] mazeDimensions = new int[]{500, 500};
+                        int[] mazeDimensions = new int[]{1000, 1000};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
                         toServer.flush();
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed withMyCompressor) from server
                         System.out.println(compressedMaze.length);
                         //InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        byte[] decompressedMaze = new byte[251000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
+                        byte[] decompressedMaze = new byte[1002000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         Maze maze = new Maze(decompressedMaze);
                         //maze.print();
@@ -156,11 +156,11 @@ public class RunCommunicateWithServers {
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
                         MyMazeGenerator mg = new MyMazeGenerator();
-                        int[][] map = {{0,0,0,0,0},{0,0,0,1,0},{0,0,0,1,0},{1,0,0,0,0}};
-                        Position start = new Position(0,0);
-                        Position end = new Position(2,4);
-                        Maze maze = new Maze(start,end,map);
-                        //Maze maze = mg.generate(5, 5);
+//                        int[][] map = {{0,0,0,0,0},{0,1,0,1,0},{1,0,0,1,0},{1,1,0,0,0}};
+//                        Position start = new Position(0,0);
+//                        Position end = new Position(2,4);
+//                        Maze maze = new Maze(start,end,map);
+                        Maze maze = mg.generate(1000, 1000);
                         //maze.print();
                         toServer.writeObject(maze); //send maze to server
                         toServer.flush();

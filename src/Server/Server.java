@@ -1,10 +1,8 @@
 package Server;
 
-import java.lang.reflect.Executable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.sql.SQLOutput;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -54,7 +52,7 @@ public class Server {
 
     private void handleClient(Socket clientSocket) {
         try{
-            strategy.applyStrategy(clientSocket.getInputStream() , clientSocket.getOutputStream());
+            strategy.ServerStrategy(clientSocket.getInputStream() , clientSocket.getOutputStream());
             System.out.println("Done handeling client: " +clientSocket.toString());
             clientSocket.close();
         }
