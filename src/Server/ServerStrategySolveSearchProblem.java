@@ -22,10 +22,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             int cols = maze.getMaze()[0].length;
             String folderName = rows + "_" + cols;
             byte[] mazeInByte = maze.toByteArray();
-            int fileNameIntByte = Arrays.hashCode((mazeInByte));
             String fileNameString = Arrays.toString(mazeInByte);
             int fileNameIntString = fileNameString.hashCode();
-            String fileNameToPath = Integer.toString(fileNameIntByte) +"_"+ Integer.toString(fileNameIntString);
+            String fileNameToPath = Integer.toString(fileNameIntString);
             boolean checkDir = new File(tempDirectoryPath,folderName).exists();
             //check if size folder is exist
             if(checkDir)
