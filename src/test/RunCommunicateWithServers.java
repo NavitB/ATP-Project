@@ -23,100 +23,25 @@ import java.util.concurrent.Executors;
 
 
 public class RunCommunicateWithServers {
-//    public static void main(String[] args) {
-//        //Initializing servers
-//        Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
-//        Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-//        //Starting  servers
-//        solveSearchProblemServer.start();
-//        //mazeGeneratingServer.start();
-//        //Communicating with servers
-//        //CommunicateWithServer_MazeGenerating();
-//        CommunicateWithServer_SolveSearchProblem();
-//        //Stopping all servers
-//        //mazeGeneratingServer.stop();
-//        solveSearchProblemServer.stop();
-//        //stringReverserServer.stop();
-//    }
-public static void main(String[] args) {
-//Initializing servers
-    Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
-    Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-//Starting servers
-    solveSearchProblemServer.start();
-    mazeGeneratingServer.start();
-//        Thread t = new Thread(() -> mazeGeneratingServer.start());
-//        t.start();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-    for (int j = 0; j < 10; j++) {
-        Thread a = new Thread(() -> CommunicateWithServer_MazeGenerating());
-        a.start();
+    public static void main(String[] args) {
+        //Initializing servers
+        Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+        Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+        //Starting  servers
+        solveSearchProblemServer.start();
+        mazeGeneratingServer.start();
+        //Communicating with servers
+        CommunicateWithServer_MazeGenerating();
+        CommunicateWithServer_SolveSearchProblem();
+        //Stopping all servers
+        mazeGeneratingServer.stop();
+        solveSearchProblemServer.stop();
+        //stringReverserServer.stop();
     }
-    for (int i = 0; i < 10; i++) {
-        Thread b = new Thread(() -> CommunicateWithServer_SolveSearchProblem());
-        b.start();
-    }
-
-
-
-
-//        CommunicateWithServer_SolveSearchProblem();
-
-
-//
-
-//Stopping all servers
-    //mazeGeneratingServer.stop();
-    //solveSearchProblemServer.stop();
-//        Scanner s = new Scanner(System.in);
-//        while (true){
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            if(s.nextLine().equals("exit"))
-//            break;
-//        }
-//        mazeGeneratingServer.stop();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        Thread b = new Thread(() -> solveSearchProblemServer.start());
-//        b.start();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        Thread c = new Thread(() -> CommunicateWithServer_SolveSearchProblem());
-//        c.start();
-    Scanner s = new Scanner(System.in);
-    while (true){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(s.nextLine().equals("e"))
-            break;
-    }
-    solveSearchProblemServer.stop();
-    mazeGeneratingServer.stop();
-
-
-}
 
     private static void CommunicateWithServer_MazeGenerating() {
         try {
             Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
-            //Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
 
             @Override
                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
@@ -124,17 +49,15 @@ public static void main(String[] args) {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        int[] mazeDimensions = new int[]{1000, 1000};
+                        int[] mazeDimensions = new int[]{50, 50};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
                         toServer.flush();
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed withMyCompressor) from server
-                        System.out.println(compressedMaze.length);
-                        //InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        byte[] decompressedMaze = new byte[1002000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
+                        byte[] decompressedMaze = new byte[2512 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         Maze maze = new Maze(decompressedMaze);
-                        //maze.print();
+                        maze.print();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -156,12 +79,8 @@ public static void main(String[] args) {
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
                         MyMazeGenerator mg = new MyMazeGenerator();
-//                        int[][] map = {{0,0,0,0,0},{0,1,0,1,0},{1,0,0,1,0},{1,1,0,0,0}};
-//                        Position start = new Position(0,0);
-//                        Position end = new Position(2,4);
-//                        Maze maze = new Maze(start,end,map);
-                        Maze maze = mg.generate(500, 1000);
-                        //maze.print();
+                        Maze maze = mg.generate(50, 50);
+                        maze.print();
                         toServer.writeObject(maze); //send maze to server
                         toServer.flush();
                         Solution mazeSolution = (Solution) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server

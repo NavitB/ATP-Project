@@ -36,7 +36,7 @@ public class Server {
                 }
                 catch (SocketTimeoutException e)
                 {
-                   e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
             serverSocket.close();
