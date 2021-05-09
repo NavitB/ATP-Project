@@ -10,10 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
     static private AtomicInteger count = new AtomicInteger(0);
+    private Object lock1 = new Object();
+    private Object lock2 = new Object();
     @Override
     public void ServerStrategy(InputStream inFromClient, OutputStream outToClient) {
         try{
-            Solution solution;
+            Solution solution = null;
             ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
             Maze maze = (Maze) fromClient.readObject();
@@ -58,15 +60,15 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                     {
                         solution = getSolutionPath(maze, tempDirectoryPath, folderName, fileNameToPath);
                     }
-                    else
-                    {
-                        throw new IOException();
-                    }
+//                    else
+//                    {
+//                        throw new IOException();
+//                    }
                 }
-                else
-                {
-                    throw new IOException();
-                }
+//                else
+//                {
+//                    throw new IOException();
+//                }
             }
             toClient.writeObject(solution);
            // toClient.flush();
@@ -86,7 +88,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
         String solPath = tempDirectoryPath+ folderName +"\\"+ "Solutions" + "\\" +fileNameToPath+ "Sol_" + solCounter;
         FileOutputStream fileOut = new FileOutputStream(solPathFile);
         ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-        objectOut.writeObject(solPath);
+        synchronized (lock1){
+            objectOut.writeObject(solPath);
+        }
         solution = createSolution( maze, tempDirectoryPath,folderName + "\\Solutions", fileNameToPath+"Sol_" + solCounter);
         return solution;
     }
@@ -113,7 +117,10 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
         String newDir = tempDirectoryPath+ "\\" + folderName + "\\" + fileName;
         FileOutputStream fileOut = new FileOutputStream(newDir);
         ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-        objectOut.writeObject(solution);
+        synchronized (lock2)
+        {
+            objectOut.writeObject(solution);
+        }
         objectOut.close();
         return solution;
     }
