@@ -16,28 +16,35 @@ public class MyDecompressorInputStream extends InputStream {
     }
 
     @Override
-    public int read(byte[] b) throws IOException {
-        byte[] bCompressed = in.readAllBytes();
-        int index =0;
-        int rows = 0,cols = 0;
-        index = readMetaData(bCompressed,index,b);
-        for(int i=0; i < index; i++)
+    public int read(byte[] b){
+        try
         {
-            rows += Byte.toUnsignedInt((Byte)bCompressed[i]);
-        }
-        int tempIndex = index;
-        index = readMetaData(bCompressed,index,b);
-        for(int i = tempIndex ; i < index; i++)
-        {
-            cols += Byte.toUnsignedInt((Byte)bCompressed[i]);
-        }
-        index = 0;
-        int mazeLength = rows * cols;
-        for(int i = 0 ; i < 6 ; i ++)
-        {
+            byte[] bCompressed = in.readAllBytes();
+            int index =0;
+            int rows = 0,cols = 0;
             index = readMetaData(bCompressed,index,b);
+            for(int i=0; i < index; i++)
+            {
+                rows += Byte.toUnsignedInt((Byte)bCompressed[i]);
+            }
+            int tempIndex = index;
+            index = readMetaData(bCompressed,index,b);
+            for(int i = tempIndex ; i < index; i++)
+            {
+                cols += Byte.toUnsignedInt((Byte)bCompressed[i]);
+            }
+            index = 0;
+            int mazeLength = rows * cols;
+            for(int i = 0 ; i < 6 ; i ++)
+            {
+                index = readMetaData(bCompressed,index,b);
+            }
+            readMaze(bCompressed,index,b,mazeLength);
         }
-        readMaze(bCompressed,index,b,mazeLength);
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return b.length;
     }
 
@@ -68,23 +75,30 @@ public class MyDecompressorInputStream extends InputStream {
 
     }
 
-    private int readMetaData(byte[] bCompressed , int index,byte[] b) throws IOException {
-        if (bCompressed[index] == 0)
+    private int readMetaData(byte[] bCompressed , int index,byte[] b){
+        try
         {
-            b[index] = bCompressed[index];
-            index++;
-            b[index] = bCompressed[index];
-            index++;
-        }
-        else
-        {
-            while(bCompressed[index]!=0)
+            if (bCompressed[index] == 0)
             {
                 b[index] = bCompressed[index];
                 index++;
+                b[index] = bCompressed[index];
+                index++;
             }
-            b[index] = bCompressed[index];
-            index++;
+            else
+            {
+                while(bCompressed[index]!=0)
+                {
+                    b[index] = bCompressed[index];
+                    index++;
+                }
+                b[index] = bCompressed[index];
+                index++;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return index;
     }

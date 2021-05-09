@@ -17,45 +17,56 @@ public class SimpleDecompressorInputStream extends InputStream {
     }
 
     @Override
-    public int read(byte[] b) throws IOException {
-        byte[] bCompressed = in.readAllBytes();
-        int index =0;
-        for(int i = 0 ; i < 6 ; i ++)
+    public int read(byte[] b) {
+        try
         {
-            index = readMetaData(bCompressed,index,b);
+            byte[] bCompressed = in.readAllBytes();
+            int index =0;
+            for(int i = 0 ; i < 6 ; i ++)
+            {
+                index = readMetaData(bCompressed,index,b);
+            }
+            int currNum = 1;
+            int j = index;
+            while(j < bCompressed.length)
+            {
+                index = readMaze(currNum,bCompressed[j], b, index);
+                j++;
+                if(currNum == 1)
+                    currNum = 0;
+                else
+                    currNum = 1;
+            }
         }
-        int currNum = 1;
-        int j = index;
-        while(j < bCompressed.length)
+        catch (Exception e)
         {
-            index = readMaze(currNum,bCompressed[j], b, index);
-            j++;
-            if(currNum == 1)
-                currNum = 0;
-            else
-                currNum = 1;
+            e.printStackTrace();
         }
         return b.length;
     }
 
 
-    private int readMetaData(byte[] bCompressed , int index,byte[] b) throws IOException {
-        if (bCompressed[index] == 0)
-        {
-            b[index] = bCompressed[index];
-            index++;
-            b[index] = bCompressed[index];
-            index++;
-        }
-        else
-        {
-            while(bCompressed[index]!=0)
-            {
+    private int readMetaData(byte[] bCompressed , int index,byte[] b){
+        try {
+
+
+            if (bCompressed[index] == 0) {
+                b[index] = bCompressed[index];
+                index++;
+                b[index] = bCompressed[index];
+                index++;
+            } else {
+                while (bCompressed[index] != 0) {
+                    b[index] = bCompressed[index];
+                    index++;
+                }
                 b[index] = bCompressed[index];
                 index++;
             }
-            b[index] = bCompressed[index];
-            index++;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return index;
     }

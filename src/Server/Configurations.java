@@ -38,13 +38,30 @@ public class Configurations {
         return properties.getProperty("threadPoolSize");
     }
 
+    public void setNumOfThreads(String n)
+    {
+        properties.setProperty("threadPoolSize",n);
+    }
+
     public String getGeneratingAlgo(){
         return properties.getProperty("mazeGeneratingAlgorithm");
+    }
+
+    public void setGeneratingAlgo(String algo)
+    {
+        properties.setProperty("mazeGeneratingAlgorithm",algo);
     }
 
     public String getSearchingAlgo(){
         return properties.getProperty("mazeSearchingAlgorithm");
     }
+
+    public void setSearchingAlgo(String algo)
+    {
+        properties.setProperty("mazeSearchingAlgorithm",algo);
+    }
+
+
 
 }
 
