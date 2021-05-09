@@ -18,7 +18,6 @@ public class Server {
         this.listeningIntervalsMS = listeningIntervalsMS;
         this.strategy = strategy;
         this.threadPool= Executors.newFixedThreadPool(Integer.parseInt(Configurations.getConf().getNumOfThreads()));
-        //this.threadPool = Executors.newFixedThreadPool(2);
     }
 
     public void start(){
@@ -33,13 +32,11 @@ public class Server {
             {
                 try{
                     Socket clientSocket = serverSocket.accept();
-                    System.out.println("Client accepted : " + clientSocket.toString());
                     threadPool.submit(()-> handleClient(clientSocket));
                 }
                 catch (SocketTimeoutException e)
                 {
-                    System.out.println("socket timeout");
-                   // e.printStackTrace();
+                   e.printStackTrace();
                 }
             }
             serverSocket.close();
@@ -53,7 +50,6 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try{
             strategy.ServerStrategy(clientSocket.getInputStream() , clientSocket.getOutputStream());
-            System.out.println("Done handeling client: " +clientSocket.toString());
             clientSocket.close();
         }
         catch (Exception e)

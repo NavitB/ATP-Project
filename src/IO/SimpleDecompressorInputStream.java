@@ -38,24 +38,7 @@ public class SimpleDecompressorInputStream extends InputStream {
         return b.length;
     }
 
-//    @Override
-//    public int read() throws IOException {
-//        ArrayList<Byte> b = new ArrayList<>();
-//        int input = in.read();
-//        if (input != -1) {
-//            //read the metadata
-//            for (int i = 0; i < 6; i++) {
-//                b.addAll(readMetaData(input));
-//                input = in.read();
-//            }
-//        }
-//        int currNum = 1;
-//        while(input != -1)
-//        {
-//            b.addAll(readMaze(currNum,input);
-//            input = in.read();
-//        }
-//    }
+
     private int readMetaData(byte[] bCompressed , int index,byte[] b) throws IOException {
         if (bCompressed[index] == 0)
         {
@@ -78,21 +61,7 @@ public class SimpleDecompressorInputStream extends InputStream {
     }
 
 
-//    private ArrayList<Byte> readMetaData( int input) throws IOException {
-//        ArrayList<Byte> b = new ArrayList<>();
-//        if (input == 0) {
-//            b.add((byte) input);
-//            b.add((byte) in.read());
-//        } else {
-//            while (input != 0) {
-//                b.add((byte) input);
-//                input = in.read();
-//            }
-//            b.add((byte) input);
-//        }
-//        return b;
-//
-//    }
+
     private int readMaze(int currNum, byte count,byte[] b,int index)
     {
         for(int i = 0 ; i < Byte.toUnsignedInt(count); i++)

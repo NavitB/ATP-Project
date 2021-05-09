@@ -1,8 +1,6 @@
 package Server;
 
 import IO.MyCompressorOutputStream;
-import IO.SimpleCompressorOutputStream;
-import IO.SimpleDecompressorInputStream;
 import algorithms.mazeGenerators.*;
 
 import java.io.*;
